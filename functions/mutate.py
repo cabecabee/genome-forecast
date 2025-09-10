@@ -1,5 +1,6 @@
 import read_fasta
+from genome_forecast import taxamutacao
 
-def mutate(mutationrate, fastafile): # Adquira essas informações por meio de input
+def mutate(taxamutacao, fastafile): # Adquira essas informações por meio de input
     for i in read_fasta(fastafile):
         

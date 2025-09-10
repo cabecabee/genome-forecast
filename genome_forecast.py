@@ -17,13 +17,18 @@ print("2: Moderada")
 print("3: Alta")
 print("")
 
-intensidade = str(input("Intensidade: "))
+intensidade = int(input("Intensidade: "))
 
 print("")
-print("Finalmente, o quão frequentemente na semana você realiza estes hábitos?")
-print("1: 1-2 vezes")
-print("2: 3-5 vezes")
-print("3: 6-7 vezes")
+print("Finalmente, o quão frequentemente na semana você realiza estes hábitos? Digite apenas o número de dias na semana nos quais você realiza estes hábitos.")
 print("")
 
-periodo = str(input("Periodicidade: "))
+periodo = int(input("Periodicidade: "))
+
+intensidades = {
+    1: 2,
+    2: 7,
+    3: 100
+}
+
+taxamutacao = intensidades[intensidade] * periodo
