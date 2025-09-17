@@ -11,7 +11,8 @@ def read_fasta(filepath):
                     yield{
                         "id": header.split()[0],
                         "desc": header,
-                        "seq": "".join(seq)
+                        "seq": "".join(seq),
+                        "bases": len(seq[0])
                     }
                 header = line[1:]
                 seq = []
