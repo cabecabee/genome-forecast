@@ -25,9 +25,3 @@ def read_fasta(filepath):
                 "seq": "".join(seq),
                 "bases": len(seq[0])
             }
-
-for i in read_fasta("fastafiles/p53.fasta"):
-    print("ID:", i["id"])
-    print("Descrição:", i["desc"])
-    print("Sequência:", i["seq"])
-    print("Bases:", i["bases"])

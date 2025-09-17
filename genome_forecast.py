@@ -1,3 +1,6 @@
+from functions.mutate import mutate
+from functions.read_fasta import read_fasta
+
 print("Bem vindo ao programa Genome Forecast!")
 print('Utilize a seguinte sintaxe: "1 3" caso tenha, por exemplo, os hábitos 1 e 3. Caso tenha apenas um, apenas digite o número deste hábito.')
 
@@ -17,18 +20,20 @@ print("2: Moderada")
 print("3: Alta")
 print("")
 
-intensidade = int(input("Intensidade: "))
+intensity = int(input("Intensidade: "))
 
 print("")
 print("Finalmente, o quão frequentemente na semana você realiza estes hábitos? Digite apenas o número de dias na semana nos quais você realiza estes hábitos.")
 print("")
 
-periodo = int(input("Periodicidade: "))
+period = int(input("Periodicidade: "))
 
-intensidades = {
-    1: 2,
-    2: 7,
-    3: 100
+intensities = {
+    1: ,
+    2: 7,100
+    3: 2
 }
 
-taxamutacao = intensidades[intensidade] * periodo
+userrate = intensities[intensity] / period
+
+mutate(userrate, "fastafiles/p53.fasta")
