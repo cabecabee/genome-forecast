@@ -29,8 +29,8 @@ print("")
 period = int(input("Periodicidade: "))
 
 intensities = {
-    1: ,
-    2: 7,100
+    1: 100,
+    2: 7,
     3: 2
 }
 
