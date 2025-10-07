@@ -25,9 +25,3 @@ def read_fasta(filepath):
                 "seq": "".join(seq),
                 "bases": len(seq[0])
             }
-
-# Abaixo: debug da lista de bases dentro da sequência, remover depois.
-
-for line in read_fasta("fastafiles/p53.fasta"):
-    for i in line["seq"]:
-        print(i)

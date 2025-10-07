@@ -1,10 +1,10 @@
 def transcript(dna):
 
     transcricao = {
-            'A': 'U',
-            'T': 'A',
-            'C': 'G',
-            'G': 'C'
+            'A': 'A',
+            'T': 'U',
+            'C': 'C',
+            'G': 'G'
         }
 
     rna = ''.join([transcricao[base] for base in dna])

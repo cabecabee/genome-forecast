@@ -1,3 +1,4 @@
+from transcript import transcript
 translate_table = {
     "Phe": {"UUU", "UUC"},
     "Leu": {"UUA", "UUG", "CUU", "CUC", "CUA", "CUG", "AGU", "AGC"},
@@ -24,7 +25,8 @@ translate_table = {
 
 # isto ainda não é uma função!!!! quando estiver em casa eu transformo em uma :)
 
-rna = "CGCAAUGGCGGA"
+dna = "ATGAGCCGGATC"
+rna = transcript(dna)
 codons = []
 if len(rna) % 3 != 0:
     print("Não é múltiplo de 3.")
