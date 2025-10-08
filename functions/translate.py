@@ -1,5 +1,5 @@
-from transcript import transcript
-from read_fasta import read_fasta
+from functions.transcript import transcript
+from functions.read_fasta import read_fasta
 def translate(rna):
     translate_table = {
         "Phe": {"UUU", "UUC"},
@@ -24,15 +24,20 @@ def translate(rna):
         "Glu": {"GAA", "GAG"},
         "Gly": {"GGU", "GGC", "GGA", "GGG"}
     }
-
-    codons = []
-    if len(rna) % 3 != 0:
-        print("Não é múltiplo de 3.")
-    else:
-        codons = [rna[i:i+3] for i in range(0, len(rna), 3)]
-
+    metindex = -1
+    for i in range(len(rna) - 2):
+        codon = rna[i:i+3]
+        if codon == "AUG":
+            metindex = i
+            break
+    if metindex == -1:
+        return []
+    
     aminoacidos = []
-    for codon in codons:
+    for i in range(metindex, len(rna)-2, 3):
+        codon = rna[i:i+3]
+        if codon in translate_table["stop"]:
+            break
         for amino, codonset in translate_table.items():
             if codon in codonset:
                 aminoacidos.append(amino)

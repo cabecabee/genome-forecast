@@ -25,3 +25,4 @@ def read_fasta(filepath):
                 "seq": "".join(seq),
                 "bases": len(seq[0])
             }
+            # mudar id para o numero da linha no qual o identificador se encontra
