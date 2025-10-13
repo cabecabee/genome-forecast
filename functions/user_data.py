@@ -15,9 +15,9 @@ def user_data():
                 break
             else:
                 print("Resposta incompátivel com a sequência do programa!")
-                
-        except:
-            print("\nResposta inválida")
+        except (EOFError, KeyboardInterrupt):
+            print("\nPrograma encerrado pelo usuário.")
+            return
         
     tabagism = False
             
@@ -34,8 +34,11 @@ def user_data():
             else:
                 print("")
                 print("Valor deve ser > 0!")
-        except:
+        except ValueError:
             print("\nA resposta deve ser numérica!")
+        except (EOFError, KeyboardInterrupt):
+            print("\nPrograma encerrado pelo usuário.")
+            return
 
     intensit = False
             
@@ -52,8 +55,11 @@ def user_data():
                 break
             else:
                 print("Isto não configura um hábito.")
-        except:
+        except ValueError:
             print("\nA resposta deve ser numérica!")
+        except (EOFError, KeyboardInterrupt):
+            print("\nPrograma encerrado pelo usuário.")
+            return
 
     habit = False
                 
