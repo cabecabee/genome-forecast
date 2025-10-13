@@ -1,8 +1,5 @@
 def user_data():
-
-    tabagism = True
-    
-    while tabagism :
+    while True:
         try:
             print("")
             print("Você tem o hábito do tabagismo?")
@@ -18,11 +15,8 @@ def user_data():
         except (EOFError, KeyboardInterrupt):
             print("\nPrograma encerrado pelo usuário.")
             return
-        
-    tabagism = False
-            
-    intensit = True
-    while intensit :
+
+    while True:
         try:
             print("")
             print("Quantos cigarros você fuma por dia, em média?")
@@ -38,12 +32,9 @@ def user_data():
             print("\nA resposta deve ser numérica!")
         except (EOFError, KeyboardInterrupt):
             print("\nPrograma encerrado pelo usuário.")
-            return
+            return   
 
-    intensit = False
-            
-    habit = True
-    while habit:
+    while True:
         try:
             print("")
             print("Há quanto tempo você fuma em meses?")
@@ -60,8 +51,6 @@ def user_data():
         except (EOFError, KeyboardInterrupt):
             print("\nPrograma encerrado pelo usuário.")
             return
-
-    habit = False
                 
     pack = n_intensity / 20
     years = n_period / 12
