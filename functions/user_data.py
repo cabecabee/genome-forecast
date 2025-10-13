@@ -15,7 +15,7 @@ def user_data():
             if tabagismo == "1":
                 break
             else:
-                print("Resposta incompátivel com a sequêcia do programa!")
+                print("Resposta incompátivel com a sequência do programa!")
         except:
             print("Resposta inválida")
         
