@@ -1,51 +1,58 @@
-from functions.mutate import mutate
-from functions.read_fasta import read_fasta
+def user_data():
 
-print("Bem vindo ao programa Genome Forecast!")
-print("Forneça respostas somente númericas")
-
-print("")
-print("Você tem o hábito do tabagismo?")
-print("1: Sim, costumo fumar com frêquencia")
-print("2: Não, não costumo fumar")
-
-tabagismo = input("Resposta: ")
-
-if tabagismo == "2":
-    print("Infelizmente, não será possível utilizar o Genome Forecast neste caso!")
-else: 
-    print("")
-    print("Quantos cigarros você fuma por dia, em média?")
-    intensity = int(input("Número de cigarros: "))
-
-    if intensity < 1:
-        print("")
-        print("Valor inválido")
-    else:
-        print("")
-        print("Há quanto tempo você fuma em meses?")
-        period = int(input("Tempo em meses: "))
-        print("")
-
-        if period < 1:
-            print("Isto não configura um hábito.")
-        else:
+    tabagism = True
     
-            pack = intensity / 20
-            years = period / 12
+    while tabagism :
+        print("")
+        print("Você tem o hábito do tabagismo?")
+        print("1: Sim, costumo fumar com frêquencia")
+        print("2: Não, não costumo fumar")
 
-            packyears = pack * years
+        tabagismo = input("Resposta: ")
 
-            beta = 150 / 1
+        if tabagismo == "2":
+            print("Infelizmente, não será possível utilizar o Genome Forecast neste caso!")
+        else:
+            tabagism = False
+            intensit = True
+            while intensit :
+                print("")
+                print("Quantos cigarros você fuma por dia, em média?")
+                intensity = int(input("Número de cigarros: "))
 
-            L = 1200 * 2
-            D = 10
-            alfa = beta / (L * D)
+                if intensity < 1:
+                    print("")
+                    print("Valor inválido")
+                else:
+                    intensit = False
+                    habit = True
+                    while habit:
+                        print("")
+                        print("Há quanto tempo você fuma em meses?")
+                        period = int(input("Tempo em meses: "))
+                        print("")
 
-            u0 = 1.00e-9
-            u =  u0 + (alfa * packyears)
+                        if period < 1:
+                            print("Isto não configura um hábito.")
+                        else:
+                
+                            pack = intensity / 20
+                            years = period / 12
 
-            lambida = u * L * D
+                            packyears = pack * years
 
-            print(packyears)
-            print("Número esperado de mutações:", lambida)
+                            beta = 150 / 1
+
+                            L = 1200 * 2
+                            D = 10
+                            alfa = beta / (L * D)
+
+                            u0 = 1.00e-9
+                            u =  u0 + (alfa * packyears)
+
+                            lambida = u * L * D
+
+                            print(packyears)
+                            print("Número esperado de mutações:", lambida)
+
+                            habit = False
