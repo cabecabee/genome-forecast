@@ -10,64 +10,71 @@ def user_data():
 
         tabagismo = input("Resposta: ")
 
-        if tabagismo == "2":
-            print("Infelizmente, não será possível utilizar o Genome Forecast neste caso!")
-        elif tabagismo != "1":
+        try:
+            r_tabagismo = int(tabagismo)
+            if tabagismo == "1":
+                break
+            else:
+                print("Resposta incompátivel com a sequêcia do programa!")
+        except:
             print("Resposta inválida")
-        else:
-            tabagism = False
+        
+    tabagism = False
             
-            intensit = True
-            while intensit :
+    intensit = True
+    while intensit :
+        print("")
+        print("Quantos cigarros você fuma por dia, em média?")
+        intensity = input("Número de cigarros: ")
+
+        try:
+            n_intensity = int(intensity)
+            if n_intensity >= 1:
+                break
+            else:
                 print("")
-                print("Quantos cigarros você fuma por dia, em média?")
-                intensity = input("Número de cigarros: ")
+                print("Valor deve ser > 1!")
+        except:
+            print("A resposta deve ser numérica!")
 
-                try:
-                    n_intensity = int(intensity)
-                    if n_intensity >= 1:
-                        break
-                    else:
-                        print("")
-                        print("Valor deve ser > 1!")
-                except:
-                    print("A resposta deve ser numérica!")
-
-            intensit = False
+    intensit = False
             
-            habit = True
-            while habit:
-                print("")
-                print("Há quanto tempo você fuma em meses?")
-                period = input("Tempo em meses: ")
-                print("")
+    habit = True
+    while habit:
+        print("")
+        print("Há quanto tempo você fuma em meses?")
+        period = input("Tempo em meses: ")
+        print("")
 
-                try:
-                    n_period = int(period)
-                    if n_period >= 1:
-                        break
-                    else:
-                        print("Isto não configura um hábito.")
-                except:
-                    print("A resposta deve ser numérica!")
+        try:
+            n_period = int(period)
+            if n_period >= 1:
+                break
+            else:
+                print("Isto não configura um hábito.")
+        except:
+            print("A resposta deve ser numérica!")
 
-            habit = False
+    habit = False
                 
-            pack = n_intensity / 20
-            years = n_period / 12
+    pack = n_intensity / 20
+    years = n_period / 12
 
-            packyears = pack * years
+    packyears = pack * years
 
-            beta = 150 / 1
+    beta = 150 / 1
 
-            L = 1200 * 2
-            D = 10
-            alfa = beta / (L * D)
+    L = 1200 * 2
+    D = 10
+    alfa = beta / (L * D)
 
-            u0 = 1.00e-9
-            u =  u0 + (alfa * packyears)
+    u0 = 1.00e-9
+    u =  u0 + (alfa * packyears)
 
-            lambida = u * L * D
+    lambida = u * L * D
 
-            print(packyears)
-            print("Número esperado de mutações:", lambida)
+    print(packyears)
+    print("Número esperado de mutações:", lambida)
+
+
+user_data()
