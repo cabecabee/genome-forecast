@@ -33,7 +33,7 @@ def user_data():
                 break
             else:
                 print("")
-                print("Valor deve ser > 1!")
+                print("Valor deve ser > 0!")
         except:
             print("A resposta deve ser numérica!")
 
@@ -73,7 +73,6 @@ def user_data():
 
     lambida = u * L * D
 
-    print(packyears)
     print("Número esperado de mutações:", lambida)
 
 
