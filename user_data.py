@@ -12,6 +12,8 @@ def user_data():
 
         if tabagismo == "2":
             print("Infelizmente, não será possível utilizar o Genome Forecast neste caso!")
+        elif tabagismo != "1":
+            print("Resposta inválida")
         else:
             tabagism = False
             intensit = True
@@ -20,7 +22,7 @@ def user_data():
                 print("Quantos cigarros você fuma por dia, em média?")
                 intensity = int(input("Número de cigarros: "))
 
-                if intensity < 1:
+                if intensity < 1 or not isinstance(intensity, int):
                     print("")
                     print("Valor inválido")
                 else:
@@ -32,7 +34,7 @@ def user_data():
                         period = int(input("Tempo em meses: "))
                         print("")
 
-                        if period < 1:
+                        if period < 1 or not isinstance(period, int):
                             print("Isto não configura um hábito.")
                         else:
                 
