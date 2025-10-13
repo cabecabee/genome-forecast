@@ -16,45 +16,58 @@ def user_data():
             print("Resposta inválida")
         else:
             tabagism = False
+            
             intensit = True
             while intensit :
                 print("")
                 print("Quantos cigarros você fuma por dia, em média?")
-                intensity = int(input("Número de cigarros: "))
+                intensity = input("Número de cigarros: ")
 
-                if intensity < 1 or not isinstance(intensity, int):
-                    print("")
-                    print("Valor inválido")
-                else:
-                    intensit = False
-                    habit = True
-                    while habit:
+                try:
+                    n_intensity = int(intensity)
+                    if n_intensity >= 1:
+                        break
+                    else:
                         print("")
-                        print("Há quanto tempo você fuma em meses?")
-                        period = int(input("Tempo em meses: "))
-                        print("")
+                        print("Valor deve ser > 1!")
+                except:
+                    print("A resposta deve ser numérica!")
 
-                        if period < 1 or not isinstance(period, int):
-                            print("Isto não configura um hábito.")
-                        else:
+            intensit = False
+            
+            habit = True
+            while habit:
+                print("")
+                print("Há quanto tempo você fuma em meses?")
+                period = input("Tempo em meses: ")
+                print("")
+
+                try:
+                    n_period = int(period)
+                    if n_period >= 1:
+                        break
+                    else:
+                        print("Isto não configura um hábito.")
+                except:
+                    print("A resposta deve ser numérica!")
+
+            habit = False
                 
-                            pack = intensity / 20
-                            years = period / 12
+            pack = n_intensity / 20
+            years = n_period / 12
 
-                            packyears = pack * years
+            packyears = pack * years
 
-                            beta = 150 / 1
+            beta = 150 / 1
 
-                            L = 1200 * 2
-                            D = 10
-                            alfa = beta / (L * D)
+            L = 1200 * 2
+            D = 10
+            alfa = beta / (L * D)
 
-                            u0 = 1.00e-9
-                            u =  u0 + (alfa * packyears)
+            u0 = 1.00e-9
+            u =  u0 + (alfa * packyears)
 
-                            lambida = u * L * D
+            lambida = u * L * D
 
-                            print(packyears)
-                            print("Número esperado de mutações:", lambida)
-
-                            habit = False
+            print(packyears)
+            print("Número esperado de mutações:", lambida)
