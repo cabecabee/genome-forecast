@@ -3,31 +3,31 @@ def user_data():
     tabagism = True
     
     while tabagism :
-        print("")
-        print("Você tem o hábito do tabagismo?")
-        print("1: Sim, costumo fumar com frêquencia")
-        print("2: Não, não costumo fumar")
-
-        tabagismo = input("Resposta: ")
-
         try:
-            r_tabagismo = int(tabagismo)
+            print("")
+            print("Você tem o hábito do tabagismo?")
+            print("1: Sim, costumo fumar com frêquencia")
+            print("2: Não, não costumo fumar")
+
+            tabagismo = input("Resposta: ").strip()
+
             if tabagismo == "1":
                 break
             else:
                 print("Resposta incompátivel com a sequência do programa!")
+                
         except:
-            print("Resposta inválida")
+            print("\nResposta inválida")
         
     tabagism = False
             
     intensit = True
     while intensit :
-        print("")
-        print("Quantos cigarros você fuma por dia, em média?")
-        intensity = input("Número de cigarros: ")
-
         try:
+            print("")
+            print("Quantos cigarros você fuma por dia, em média?")
+            intensity = input("Número de cigarros: ")
+
             n_intensity = int(intensity)
             if n_intensity >= 1:
                 break
@@ -35,25 +35,25 @@ def user_data():
                 print("")
                 print("Valor deve ser > 0!")
         except:
-            print("A resposta deve ser numérica!")
+            print("\nA resposta deve ser numérica!")
 
     intensit = False
             
     habit = True
     while habit:
-        print("")
-        print("Há quanto tempo você fuma em meses?")
-        period = input("Tempo em meses: ")
-        print("")
-
         try:
+            print("")
+            print("Há quanto tempo você fuma em meses?")
+            period = input("Tempo em meses: ")
+            print("")
+
             n_period = int(period)
             if n_period >= 1:
                 break
             else:
                 print("Isto não configura um hábito.")
         except:
-            print("A resposta deve ser numérica!")
+            print("\nA resposta deve ser numérica!")
 
     habit = False
                 
