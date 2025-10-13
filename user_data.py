@@ -31,7 +31,21 @@ else:
             print("Isto não configura um hábito.")
         else:
     
-        pack = intensity / 20
-        years = period / 12
+            pack = intensity / 20
+            years = period / 12
 
-        packyears = pack * years
+            packyears = pack * years
+
+            beta = 150 / 1
+
+            L = 1200 * 2
+            D = 10
+            alfa = beta / (L * D)
+
+            u0 = 1.00e-9
+            u =  u0 + (alfa * packyears)
+
+            lambida = u * L * D
+
+            print(packyears)
+            print("Número esperado de mutações:", lambida)
