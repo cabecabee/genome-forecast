@@ -70,5 +70,6 @@ def user_data():
 
     print("Número esperado de mutações:", lambida)
 
-
+# O nível de complexidade para evitar exceções se dá pelo fato de que essa parte do programa depende do usuário, e não do programador,
+# portanto é de extrema importância que não deixemos o usuário cometer erros que inutilizem o programa.
 user_data()
