@@ -1,11 +1,11 @@
 def isdna(filepath):
     allowedchars = {"A", "C", "T", "G", "U"}
-    sequence = ""
+    sequenceparts = []
     with open(filepath, "r") as f:
         for line in f:
             line = line.strip()
             if not line or line.startswith(">"):
                 continue
-            sequence += line
-    sequence.upper()
+            sequenceparts.append(line)
+    sequence = "".join(sequenceparts).upper()
     return all(base in allowedchars for base in sequence)
