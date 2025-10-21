@@ -2,9 +2,12 @@ from functions.read_fasta import read_fasta
 from functions.transcript import transcript
 from functions.translate import translate
 
-dna = ""
-for i in read_fasta("fastafiles/p53.fasta"):
-    dna = dna.join(i["seq"])
-rna = transcript(dna)
-amino = translate(rna)
-print(amino)
+# dna = ""
+# for i in read_fasta("fastafiles/p53.fasta"):
+#     dna = dna.join(i["seq"])
+# rna = transcript(dna)
+# amino = translate(rna)
+# print(amino)
+
+from functions.mutate import mutate
+mutate(0.01, "fastafiles/p53.fasta")
