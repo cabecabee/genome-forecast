@@ -1,2 +1,4 @@
 # ignoring the pycache folder, which is created at runtime
 __pycache__/
+# ignoring the duplicates folder, which is created to store duplicate files
+duplicates/
