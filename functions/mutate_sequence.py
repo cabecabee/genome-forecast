@@ -1,6 +1,6 @@
 import random
 def mutate_sequence(seq, mutationrate):
-    """Aplica mutações aleatórias de acordo com a taxa fornecida (0–1)."""
+    # aplica mutações aleatórias de acordo com a taxa fornecida (0–1), por exemplo, mutationrate = 0.01 é 1% de mutações
     bases = ["A", "C", "T", "G"]
     seq_list = list(seq)
 
