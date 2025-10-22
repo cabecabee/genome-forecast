@@ -27,9 +27,9 @@ def user_data():
                 break
             else:
                 print("")
-                print("Valor deve ser > 0!")
+                print("Resposta deve ser > 0!")
         except ValueError:
-            print("\nA resposta deve ser numérica!")
+            print("\nA resposta deve ser em número(s) inteiro(s)!")
         except (EOFError, KeyboardInterrupt):
             print("\nPrograma encerrado pelo usuário.")
             return   
@@ -47,29 +47,32 @@ def user_data():
             else:
                 print("Isto não configura um hábito.")
         except ValueError:
-            print("\nA resposta deve ser numérica!")
+            print("\nA resposta deve ser em número(s) inteiro(s)!")
         except (EOFError, KeyboardInterrupt):
             print("\nPrograma encerrado pelo usuário.")
             return
                 
-    pack = n_intensity / 20
-    years = n_period / 12
+    pack = n_intensity / 20 #nº de maços
+    years = n_period / 12 #transferencia para anos
 
-    packyears = pack * years
+    packyears = pack * years #medida universal para quantificar tabagismo.
 
-    beta = 150 / 1
+    beta = 150 #nº de mutações por uma unidade de exposição.
 
-    L = 1200 * 2
-    D = 10
-    alfa = beta / (L * D)
+    L = 1179 #tamanho em pb da cds do RNAm da P53alfa.
+    D = n_period * 1.2 #quantidade de divisões celulares neste periodo de tempo.
+    alfa = beta / (L * D) #umento da taxa por pack-year em mutações por bp por divisão por pack-year.
 
-    u0 = 1.00e-9
-    u =  u0 + (alfa * packyears)
+    u0 = 1.00e-9 #taxa basal de mutação
+    u =  u0 + (alfa * packyears) #taxa total de mutação por base e por divisão celular.
 
-    lambida = u * L * D
+    lambida = u * L * D #número esperado de mutações no gene durante aquele período.
 
+    print("Taxa total de mutação por base e por divisão celular:", u)
     print("Número esperado de mutações:", lambida)
 
-# O nível de complexidade para evitar exceções se dá pelo fato de que essa parte do programa depende do usuário, e não do programador,
-# portanto é de extrema importância que não deixemos o usuário cometer erros que inutilizem o programa.
+    # todos os valores atribuidos diretamente a uma varíavel acima, provêm de dados totalmente cíentificos.
+
+# Alta complexidade para evitar exceções pois essa parte do programa depende do usuário,
+# Logo é de extrema importância que não deixemos o usuário cometer erros que inutilizem o programa.
 user_data()
