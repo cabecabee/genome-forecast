@@ -1,3 +1,4 @@
+# seguinte, agora só falta integrar get_weights e poisson aqui!
 import random
 def mutate_sequence(seq, mutationrate):
     # aplica mutações aleatórias de acordo com a taxa fornecida (0–1), por exemplo, mutationrate = 0.01 é 1% de mutações
