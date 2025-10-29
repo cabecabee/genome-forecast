@@ -10,7 +10,7 @@ for i in range(1, len(seq)-1):
     bases.remove(base_central)
     
     for b in range(bases):
-        chave = f"{trinuc}>{b}
+        chave = f"{trinuc}>{b}"
         prob = dicionario_sbs4.get(chave, 0)
         
         if i in hotspots and chave.split(">")[1] in hotspots[i]:
