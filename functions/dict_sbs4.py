@@ -122,8 +122,7 @@ dicionario_sbs4 = {
     
 }
 
-'''criar dict para os hotpsots
-    hotspots = {
-        512: {"G>T": 3.0},
-        ...
-    }'''
+
+hotspots = {
+        512: {"G>T": 3.0}
+} # criar dict para hotspots aqui
