@@ -8,5 +8,3 @@ def duplicate(srcfile, dstdir):
         print(f"Error: Source file '{srcfile}' not found.")
     except Exception as e:
         print(f"An error occurred: {e}")
-
-duplicate("fastafiles/p53.fasta", "duplicates/")

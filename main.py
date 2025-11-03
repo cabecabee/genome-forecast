@@ -11,7 +11,47 @@ from functions.read_fasta import read_fasta
 from functions.transcript import transcript
 from functions.translate import translate
 from functions.user_data import user_data
+from functions.resource_path import resource_path
 
-# Caralho
+from tkinter import Tk # interface gráfica para escolher um arquivo fasta
+from tkinter.filedialog import askopenfilename
+
+while True:
+    usecustomfasta = input(
+        "Você gostaria de usar um arquivo FASTA personalizado (por exemplo, da sua própria TP53)?\n"
+        "(Note que esse arquivo FASTA deve estar em bases nitrogenadas de DNA e não codificado.)\n"
+        "Se você não fornecer, será usado o FASTA padrão da TP53 obtido no banco de dados NCBI (National Library of Medicine).\n"
+        "Digite 'sim' ou 'não': "
+    ).strip().lower()
+
+    if usecustomfasta in ["sim", "não"]:
+        break
+    else:
+        print("Resposta inválida! Digite 'sim' ou 'não'.\n")
+
+if usecustomfasta.strip().lower() == "sim":
+    root = Tk()
+    root.withdraw() # esconde a janela do tkinter que é inútil para nós no momento
+    filepath = askopenfilename(
+        title="Selecione o arquivo FASTA",
+        filetypes=[
+            ("FASTA files", "*.fasta"),
+            ("FASTA Nucleotide", "*.fna"),
+            ("FASTA Fragments", "*.ffn"),
+            ("FASTA RNA", "*.frn"),
+            ("FASTA short", "*.fa"),
+            ("FASTA alternate", "*.fas")
+        ]
+    )
+    root.destroy()  # fecha a instância Tk após selecionar o arquivo
+    if filepath:
+        print("Arquivo selecionado:", filepath)
+    else:
+        print("Nenhum arquivo selecionado.")
+        filepath = None
+elif usecustomfasta.strip().lower() == "não":
+    filepath = resource_path("fastafiles/gene.fna")
 
 lmbda = user_data()
+
+input("\nPrograma finalizado. Pressione ENTER para sair...")
