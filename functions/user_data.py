@@ -1,54 +1,53 @@
 def user_data():
-    while True:
-        try:
+    try:
+        # Pergunta 1
+        while True:
             print("")
             print("Você tem o hábito do tabagismo?")
-            print("1: Sim, costumo fumar com frêquencia")
+            print("1: Sim, costumo fumar com frequência")
             print("2: Não, não costumo fumar")
 
             tabagismo = input("Resposta: ").strip()
 
             if tabagismo == "1":
                 break
+            elif tabagismo == "2":
+                print("\nComo você não é fumante, este cálculo não se aplica.")
+                return
             else:
-                print("Resposta incompátivel com a sequência do programa!")
-        except (EOFError, KeyboardInterrupt):
-            print("\nPrograma encerrado pelo usuário.")
-            return
+                print("Resposta incompatível! Digite 1 ou 2.")
 
-    while True:
-        try:
+        # Pergunta 2
+        while True:
             print("")
             print("Quantos cigarros você fuma por dia, em média?")
             intensity = input("Número de cigarros: ")
 
-            n_intensity = int(intensity)
-            if n_intensity >= 1:
-                break
-            else:
-                print("")
-                print("Resposta deve ser > 0!")
-        except ValueError:
-            print("\nA resposta deve ser em número(s) inteiro(s)!")
-        except (EOFError, KeyboardInterrupt):
-            print("\nPrograma encerrado pelo usuário.")
-            return   
+            try:
+                n_intensity = int(intensity)
+                if n_intensity >= 1:
+                    break
+                else:
+                    print("Resposta deve ser > 0!")
+            except ValueError:
+                print("A resposta deve ser em número(s) inteiro(s)!")
 
-    while True:
-        try:
+        # Pergunta 3
+        while True:
             print("")
             print("Há quanto tempo você fuma em meses?")
             period = input("Tempo em meses: ")
             print("")
 
-            n_period = int(period)
-            if n_period >= 1:
-                break
-            else:
-                print("Isto não configura um hábito.")
-        except ValueError:
-            print("\nA resposta deve ser em número(s) inteiro(s)!")
-        except (EOFError, KeyboardInterrupt):
+            try:
+                n_period = int(period)
+                if n_period >= 1:
+                    break
+                else:
+                    print("Isto não configura um hábito.")
+            except ValueError:
+                print("A resposta deve ser em número(s) inteiro(s)!")
+    except (EOFError, KeyboardInterrupt):
             print("\nPrograma encerrado pelo usuário.")
             return
                 
@@ -72,7 +71,7 @@ def user_data():
     print("Número esperado de mutações:", lambida)
 
     # todos os valores atribuidos diretamente a uma varíavel acima, provêm de dados totalmente cíentificos.
+    return lambida
 
 # Alta complexidade para evitar exceções pois essa parte do programa depende do usuário,
 # Logo é de extrema importância que não deixemos o usuário cometer erros que inutilizem o programa.
-user_data()

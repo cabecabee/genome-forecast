@@ -1,4 +1,4 @@
-dicionario_sbs4 = {
+dict_sbs4 = {
     "ACA>A": 0.04219,
     "ACC>A": 0.03329,
     "ACG>A": 0.01559,

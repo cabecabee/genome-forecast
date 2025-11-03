@@ -1,4 +1,10 @@
-# ignoring the pycache folder, which is created at runtime
+# ignoring the python cache, which is created at runtime
 __pycache__/
+*.pyc
 # ignoring the duplicates folder, which is created to store duplicate files
 duplicates/
+# ignoring the pyinstaller settings
+*.spec
+# ignoring pyinstaller automatically generated folders
+dist/
+build/
