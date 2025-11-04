@@ -1,11 +1,12 @@
-from functions.prob_mut import prob_mut
-from functions.read_fasta import read_fasta
 from functions.user_data import user_data
-from functions.mat_mut import mat_mut
-lmbda = user_data()
-seq = []
-for i in read_fasta("fastafiles/p53.fasta"):
-    seq.append(i["seq"])
-seq = "".join(seq)
+from functions.read_fasta import read_fasta
+from functions.prob_mut import prob_mut
+from functions.mutate import mutate
+
+lambida = user_data()
+
+seq = next(read_fasta("fastafiles/p53.fasta"))["seq"]
+
 p_cumulative, probabilities_mut = prob_mut(seq)
-print(mat_mut(lmbda, p_cumulative, probabilities_mut))
+
+mutate(lambida, "fastafiles/p53.fasta", p_cumulative, probabilities_mut)

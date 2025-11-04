@@ -1,24 +1,39 @@
+import os
 from functions.read_fasta import read_fasta
-from functions.mutate_sequence import mutate_sequence
+from functions.mat_mut import mat_mut
+from functions.duplicate import duplicate
 
-''''Pois então. Essa função agora vai ser COMPLETAMENTE reformulada.
-Não queremos mais só adquirir a taxa de mutações, mas sim
-saber ONDE essas mutações acontecem e que essas mutações
-sejam aplicadas na duplicata da p53.'''
+def mutate(lambida, fastafile, p_cumulative, probabilities_mut):
+    dstdir = "duplicates"
 
-def mutate(mutationrate, fastafile):
-    '''Forma de realizar as mutações:
-        1. Ler o arquivo e armazenar seu conteúdo em uma única string.
-        2. Aplicar as mutações sobre essa string, de acordo com a taxa de mutação.
-        3. Escrever o resultado de volta no arquivo, substituindo o conteúdo 
-           da duplicata pela string modificada.'''
-    with open(fastafile.replace("fastafiles", "duplicates"), "w") as file:
-        for entry in read_fasta(fastafile):
-            header = entry["desc"]
-            seq = entry["seq"]
+    # garante que estamos trabalhando com a cópia em "duplicates/"
+    if not fastafile.startswith("duplicates/"):
+        duplicate(fastafile, dstdir)
+        fastafile = os.path.join(dstdir, os.path.basename(fastafile))
 
-            mutated_seq = mutate_sequence(seq, mutationrate)
-            #função mutate_sequence é onde vai acontecer a mutação real do arquivo, aqui na função mutate estamos apenas escrevendo para o arquivo
+    for entry in read_fasta(fastafile):
+        header = entry["desc"]
+        seq = list(entry["seq"])
+        seq_length = len(seq)
 
+        # sorteia e aplica mutações
+        mutacoes = mat_mut(lambida, p_cumulative, probabilities_mut)
+        for pos, nova_base in mutacoes:
+            if 0 <= pos < seq_length:
+                seq[pos] = nova_base
+            elif 1 <= pos <= seq_length:
+                seq[pos - 1] = nova_base
+
+        mutated_seq = "".join(seq)
+
+        # divide a sequência em linhas de até 70 caracteres
+        fasta_formatted = "\n".join(
+            mutated_seq[i:i+70] for i in range(0, len(mutated_seq), 70)
+        )
+
+        # sobrescreve a cópia com a versão mutada
+        with open(fastafile, "w") as file:
             file.write(f">{header}\n")
-            file.write(mutated_seq + "\n")
+            file.write(fasta_formatted + "\n")
+
+    print(f"Arquivo mutado salvo em: {fastafile}")

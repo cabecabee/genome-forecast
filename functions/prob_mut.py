@@ -1,5 +1,5 @@
-from functions.dict_sbs4 import dict_sbs4
-from functions.dict_sbs4 import hotspots
+from dicts.dict_sbs4 import dict_sbs4
+from dicts.dict_sbs4 import hotspots
 
 def prob_mut(seq):
     probabilities_mut = []
