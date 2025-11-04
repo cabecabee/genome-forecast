@@ -24,6 +24,6 @@ def mat_mut(lambida, p_cumulative, probabilities_mut):
         break
         
     if new_base:
-            mutar.append((probabilities_mut[p_chosen]["pos"], new_base))
+            mutate.append((probabilities_mut[p_chosen]["pos"], new_base))
       
   return mutate

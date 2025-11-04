@@ -38,7 +38,6 @@ if usecustomfasta.strip().lower() == "sim":
             ("FASTA files", "*.fasta"),
             ("FASTA Nucleotide", "*.fna"),
             ("FASTA Fragments", "*.ffn"),
-            ("FASTA RNA", "*.frn"),
             ("FASTA short", "*.fa"),
             ("FASTA alternate", "*.fas")
         ]
@@ -50,7 +49,7 @@ if usecustomfasta.strip().lower() == "sim":
         print("Nenhum arquivo selecionado.")
         filepath = None
 elif usecustomfasta.strip().lower() == "não":
-    filepath = resource_path("fastafiles/gene.fna")
+    filepath = resource_path("fastafiles/p53.fasta")
 
 lmbda = user_data()
 

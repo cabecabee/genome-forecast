@@ -4,7 +4,7 @@ def read_fasta(filepath):
     valid_exts = (".fasta", ".fas", ".fa", ".frn", ".fna", ".ffn")
 
     if not filepath.endswith(valid_exts):
-        print("O arquivo não é uma extensão FASTA de nucleotídeos. (.fasta, .fna, .ffn, .frn, .fa, .fas)")
+        print("O arquivo não é uma extensão FASTA de nucleotídeos. (.fasta, .fna, .ffn, .fa, .fas)")
         return
 
     if not isdna(filepath):
