@@ -1,6 +1,7 @@
 from functions.sorteio_pond import sorteio_pond
 import random
 def mat_mut(lambida, p_cumulative, probabilities_mut):
+  mutate = []
   for i in range(round(lambida)):
     #escolha da posição
     p_chosen = sorteio_pond(p_cumulative)
@@ -21,9 +22,8 @@ def mat_mut(lambida, p_cumulative, probabilities_mut):
       if n2 <= limit:
         new_base = base
         break
-
-    #meio ilustrativo, n tem seq_mut e tbm n acho que será desta forma.
-    # if nova_base:
-    #     seq_mut[p_chosen] = nova_base
+        
+    if new_base:
+            mutar.append((probabilities_mut[p_chosen]["pos"], new_base))
       
-  return new_base
+  return mutate
