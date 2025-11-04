@@ -45,4 +45,20 @@ def prob_mut(seq):
         "base_central": base_central,
         "pesos": mut_pos
         })
+
+    #não sei se esta na identação correta! \/
+    prob_pos = []
+    for i in prob_pos:
+        tot_weight = sum(i["pesos"].values())
+        prob_pos.append(tot_weight)
+
+    pp_tot = sum(prob_pos)
+    prob_pos = [p / pp_tot for p in prob_pos]
+
+    p_cumulative = []
+    add = 0
+    for p in prob_pos:
+        add += p
+        p_cumulative.append(add)
+        
     return probabilities_mut
