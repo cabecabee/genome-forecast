@@ -48,7 +48,7 @@ def prob_mut(seq):
 
     #não sei se esta na identação correta! \/
     prob_pos = []
-    for i in prob_pos:
+    for i in probabilities_mut:
         tot_weight = sum(i["pesos"].values())
         prob_pos.append(tot_weight)
 
@@ -60,5 +60,5 @@ def prob_mut(seq):
     for p in prob_pos:
         add += p
         p_cumulative.append(add)
-        
-    return probabilities_mut
+
+    return (p_cumulative, probabilities_mut)

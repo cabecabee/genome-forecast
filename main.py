@@ -24,7 +24,7 @@ while True:
         "Digite 'sim' ou 'não': "
     ).strip().lower()
 
-    if usecustomfasta in ["sim", "não"]:
+    if usecustomfasta in ["sim", "não", "nao"]:
         break
     else:
         print("Resposta inválida! Digite 'sim' ou 'não'.\n")
