@@ -1,39 +1,48 @@
-import os
 from functions.read_fasta import read_fasta
 from functions.mat_mut import mat_mut
 from functions.duplicate import duplicate
 
-def mutate(lambida, fastafile, p_cumulative, probabilities_mut):
-    dstdir = "duplicates"
+def mutate(lmbda, seq, p_cumulative, probabilities_mut):
+    seq = list(seq)
+    mutations = mat_mut(lmbda, p_cumulative, probabilities_mut)
 
-    # garante que estamos trabalhando com a cópia em "duplicates/"
-    if not fastafile.startswith("duplicates/"):
-        duplicate(fastafile, dstdir)
-        fastafile = os.path.join(dstdir, os.path.basename(fastafile))
+    for pos, new_base in mutations:
+        if 0 <= pos < len(seq):
+            seq[pos] = new_base
+    
+    return "".join(seq), mutations
 
-    for entry in read_fasta(fastafile):
-        header = entry["desc"]
-        seq = list(entry["seq"])
-        seq_length = len(seq)
+# def mutate(lambida, fastafile, p_cumulative, probabilities_mut):
+#     dstdir = "duplicates"
 
-        # sorteia e aplica mutações
-        mutacoes = mat_mut(lambida, p_cumulative, probabilities_mut)
-        for pos, nova_base in mutacoes:
-            if 0 <= pos < seq_length:
-                seq[pos] = nova_base
-            elif 1 <= pos <= seq_length:
-                seq[pos - 1] = nova_base
+#     # garante que estamos trabalhando com a cópia em "duplicates/"
+#     if not fastafile.startswith("duplicates/"):
+#         duplicate(fastafile, dstdir)
+#         fastafile = os.path.join(dstdir, os.path.basename(fastafile))
 
-        mutated_seq = "".join(seq)
+#     for entry in read_fasta(fastafile):
+#         header = entry["desc"]
+#         seq = list(entry["seq"])
+#         seq_length = len(seq)
 
-        # divide a sequência em linhas de até 70 caracteres
-        fasta_formatted = "\n".join(
-            mutated_seq[i:i+70] for i in range(0, len(mutated_seq), 70)
-        )
+#         # sorteia e aplica mutações
+#         mutacoes = mat_mut(lambida, p_cumulative, probabilities_mut)
+#         for pos, nova_base in mutacoes:
+#             if 0 <= pos < seq_length:
+#                 seq[pos] = nova_base
+#             elif 1 <= pos <= seq_length:
+#                 seq[pos - 1] = nova_base
 
-        # sobrescreve a cópia com a versão mutada
-        with open(fastafile, "w") as file:
-            file.write(f">{header}\n")
-            file.write(fasta_formatted + "\n")
+#         mutated_seq = "".join(seq)
 
-    print(f"Arquivo mutado salvo em: {fastafile}")
+#         # divide a sequência em linhas de até 70 caracteres
+#         fasta_formatted = "\n".join(
+#             mutated_seq[i:i+70] for i in range(0, len(mutated_seq), 70)
+#         )
+
+#         # sobrescreve a cópia com a versão mutada
+#         with open(fastafile, "w") as file:
+#             file.write(f">{header}\n")
+#             file.write(fasta_formatted + "\n")
+
+#     print(f"Arquivo mutado salvo em: {fastafile}")
