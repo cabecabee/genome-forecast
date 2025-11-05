@@ -23,13 +23,13 @@ while True:
         "Você gostaria de usar um arquivo FASTA personalizado (por exemplo, da sua própria TP53)?\n"
         "(Note que esse arquivo FASTA deve estar em bases nitrogenadas de DNA e não codificado.)\n"
         "Se você não fornecer, será usado o FASTA padrão da TP53 obtido no banco de dados NCBI (National Library of Medicine).\n"
-        "Digite 'sim' ou 'não': "
+        "Digite 'S' para Sim ou 'N' para Não: "
     ).strip().lower()
 
-    if usecustomfasta in ["sim", "não", "nao"]:
+    if usecustomfasta in ["s", "n"]:
         break
     else:
-        print("Resposta inválida! Digite 'sim' ou 'não'.\n")
+        print("Resposta inválida! Digite 'S' ou 'N'.\n")
 
 if usecustomfasta.strip().lower() == "sim":
     root = Tk()
