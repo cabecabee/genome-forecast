@@ -12,3 +12,5 @@ The program is currently designed exclusively for smokers.
 * Function to get the codifying codons of the DNA from the FASTA file
 * Function to get the probability of mutations happening in each base
     * The probability is calculated using weights provided by the COSMIC Cancer Database
+* Mutating a string that represents the DNA sequence
+    * Interpreting what the mutation did (i.e. knowing if it is a silent, nonsense or missense mutation)
