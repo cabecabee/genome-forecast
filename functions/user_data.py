@@ -67,8 +67,10 @@ def user_data():
 
     lambida = u * L * D #número esperado de mutações no gene durante aquele período.
 
-    print("Taxa total de mutação por base e por divisão celular:", u)
-    print("Número esperado de mutações:", lambida)
+    # print("Taxa total de mutação por base e por divisão celular:", u)
+    # print("Número esperado de mutações:", lambida)
+
+    # ^ comentado pois isso não deve aparecer para o usuário no programa final
 
     # todos os valores atribuidos diretamente a uma varíavel acima, provêm de dados totalmente cíentificos.
     return lambida

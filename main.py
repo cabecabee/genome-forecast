@@ -14,6 +14,7 @@ from functions.user_data import user_data
 from functions.mat_mut import mat_mut
 from functions.resource_path import resource_path
 from functions.sorteio_pond import sorteio_pond
+from functions.analyze_mutations import analyze_mutations
 
 from tkinter import Tk # interface gráfica para escolher um arquivo fasta
 from tkinter.filedialog import askopenfilename
@@ -54,6 +55,23 @@ elif usecustomfasta.strip().lower() == "n":
     filepath = resource_path("fastafiles/p53.fasta")
 
 lmbda = user_data()
+
+seq = ""
+for i in read_fasta(filepath):
+    seq += i["seq"]
+p_cumulative, probabilities_mut = prob_mut(seq)
+
+mut_seq, mutations = mutate(lmbda, seq, p_cumulative, probabilities_mut)
+result = analyze_mutations(seq, mut_seq, mutations)
+
+for i, original, mutado in result["amino_diffs"]:
+    if mutado == "stop":
+        tipo = "nonsense"
+    elif original != mutado:
+        tipo = "missense"
+    else:
+        tipo = "sinônima"
+    print(f"Aminoácido {i}: {original} → {mutado} ({tipo})")
 
 input("\nPrograma finalizado. Pressione ENTER para sair...")
 
