@@ -1,11 +1,11 @@
 from functions.transcript import transcript
-from functions.translate import translate
+from functions.translate_linear import translate_linear
 
 def analyze_mutations(orig_seq, mut_seq, mutations):
     orig_rna = transcript(orig_seq)
     mut_rna = transcript(mut_seq)
-    orig_amino = translate(orig_rna)
-    mut_amino = translate(mut_rna)
+    orig_amino = translate_linear(orig_rna)
+    mut_amino = translate_linear(mut_rna)
 
     # achatando as listas de proteínas em uma só sequência linear de aminoácidos
     orig_amino = [aa for protein in orig_amino for aa in protein]
