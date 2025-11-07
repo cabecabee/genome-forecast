@@ -32,7 +32,7 @@ while True:
     else:
         print("Resposta inválida! Digite 'S' ou 'N'.\n")
 
-if usecustomfasta.strip().lower() == "s":
+if usecustomfasta == "s":
     root = Tk()
     root.withdraw() # esconde a janela do tkinter que é inútil para nós no momento
     filepath = askopenfilename(
@@ -49,9 +49,9 @@ if usecustomfasta.strip().lower() == "s":
     if filepath:
         print("Arquivo selecionado:", filepath)
     else:
-        print("Nenhum arquivo selecionado.")
-        filepath = None
-elif usecustomfasta.strip().lower() == "n":
+        print("Nenhum arquivo selecionado. Usando o FASTA da NCBI por padrão.")
+        filepath = resource_path("fastafiles/p53.fasta")
+elif usecustomfasta == "n":
     filepath = resource_path("fastafiles/p53.fasta")
 
 lmbda = user_data()
