@@ -15,6 +15,7 @@ from functions.mat_mut import mat_mut
 from functions.resource_path import resource_path
 from functions.sorteio_pond import sorteio_pond
 from functions.analyze_mutations import analyze_mutations
+import sys
 
 from tkinter import Tk # interface gráfica para escolher um arquivo fasta
 from tkinter.filedialog import askopenfilename
@@ -55,6 +56,10 @@ elif usecustomfasta == "n":
     filepath = resource_path("fastafiles/p53.fasta")
 
 lmbda = user_data()
+
+if lmbda is None or lmbda == 0:
+    input("\nPrograma finalizado. Pressione ENTER para sair...")
+    sys.exit()
 
 seq = ""
 for i in read_fasta(filepath):
