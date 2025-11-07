@@ -8,7 +8,7 @@ Currently, the program is focused on **tobacco use** as a mutagenic factor.
 
 ## How it works
 1. The user provides one or more DNA sequences in a **FASTA file**.  
-2. The program collects user input about their daily habits — such as smoking frequency and intensity.  
+2. The program collects user input about their daily habits, such as smoking frequency and intensity.  
 3. Based on this data, it estimates the **number and types of mutations** that could occur.  
 4. It then simulates these mutations in the provided DNA sequence and classifies them (e.g., **silent**, **missense**, or **nonsense**).  
 
@@ -22,6 +22,25 @@ Currently, the program is focused on **tobacco use** as a mutagenic factor.
   - Uses **weights derived from the COSMIC Cancer Database**  
 - [x] DNA sequence mutation simulation  
   - Determines mutation impact: silent, missense, or nonsense
+     
+## How to Run
+
+### Running the Executable (.exe)
+If you downloaded the compiled executable version, simply run it and **follow the on-screen instructions**.  
+The program will ask a few questions about your smoking habits which are handled by the `user_data()` function.  
+After you answer, it will simulate mutations and display the results directly in the terminal.
+
+---
+
+### Running from Source Code
+If you want to run the program from source:
+
+1. Make sure you have **Python 3.10+** installed.
+2. Clone or download the repository.
+3. Inside the project folder, run:
+
+   ```bash
+   python main.py
 
 ## Future Plans
-- [ ] Define what the mutations may signify to the resulting protein structure or function 
+- [ ] Define what the mutations may signify to the resulting protein structure or function
