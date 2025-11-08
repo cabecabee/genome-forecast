@@ -56,14 +56,14 @@ def user_data():
 
     packyears = pack * years #medida universal para quantificar tabagismo.
 
-    beta = 0.000055 #nº de mutações por uma unidade de exposição em gene da P53 (150 x 3.684375×10−7 = 5,5 × 10⁻⁵).
+    beta = 5.5e-5 #nº de mutações por uma unidade de exposição em gene da P53 (150 x 3.684375×10−7 = 5,5 × 10⁻⁵).
 
     L = 1179 #tamanho em pb da cds do RNAm da P53alfa.
     D = n_period * 1.2 #quantidade de divisões celulares neste periodo de tempo.
-    alfa = beta / (L * D) #umento da taxa por pack-year em mutações por bp por divisão por pack-year.
+    #alfa = beta / (L * D) #umento da taxa por pack-year em mutações por bp por divisão por pack-year.
 
     u0 = 1.00e-9 #taxa basal de mutação
-    u =  u0 + (alfa * packyears) #taxa total de mutação por base e por divisão celular.
+    u =  u0 + (beta * packyears) #taxa total de mutação por base e por divisão celular.
 
     lambida = u * L * D #número esperado de mutações no gene durante aquele período.
 
