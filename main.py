@@ -38,7 +38,7 @@ if usecustomfasta == "s":
     root.withdraw() # esconde a janela do tkinter que é inútil para nós no momento
     filepath = askopenfilename(
         title="Selecione o arquivo FASTA",
-        filetypes=[
+        filemut_types=[
             ("FASTA files", "*.fasta"),
             ("FASTA Nucleotide", "*.fna"),
             ("FASTA Fragments", "*.ffn"),
@@ -69,14 +69,14 @@ p_cumulative, probabilities_mut = prob_mut(seq)
 mut_seq, mutations = mutate(lmbda, seq, p_cumulative, probabilities_mut)
 result = analyze_mutations(seq, mut_seq, mutations)
 
-for i, original, mutado in result["amino_diffs"]:
-    if mutado == "stop":
-        tipo = "nonsense"
-    elif original != mutado:
-        tipo = "missense"
+for i, original, mutated in result["amino_diffs"]:
+    if mutated == "stop":
+        mut_type = "nonsense"
+    elif original != mutated:
+        mut_type = "missense"
     else:
-        tipo = "sinônima"
-    print(f"Aminoácido {i}: {original} → {mutado} ({tipo})")
+        mut_type = "sinônima"
+    print(f"Aminoácido {i}: {original} -> {mutated} ({mut_type})")
 
 input("\nPrograma finalizado. Pressione ENTER para sair...")
 
