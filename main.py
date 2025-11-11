@@ -68,7 +68,7 @@ p_cumulative, probabilities_mut = prob_mut(seq)
 
 looplist = []
 
-for i in range(1000):
+for i in range(10000):
     mut_seq, mutations = mutate(lmbda, seq, p_cumulative, probabilities_mut)
     result = analyze_mutations(seq, mut_seq, mutations)
     for i, original, mutated in result["amino_diffs"]:
