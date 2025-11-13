@@ -7,7 +7,7 @@ def mutate(lmbda, seq, p_cumulative, probabilities_mut):
     mutations = mat_mut(lmbda, p_cumulative, probabilities_mut)
 
     for pos, new_base in mutations:
-        if 0 <= pos < len(seq):
+        if 1 <= pos < len(seq):
             seq[pos] = new_base
     
     return "".join(seq), mutations

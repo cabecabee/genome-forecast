@@ -75,7 +75,7 @@ for i, original, mutated in result["amino_diffs"]:
         mut_type = "missense"
     else:
         mut_type = "sinônima"
-    print(f"Aminoácido {i}: {original} -> {mutated} ({mut_type})")
+    print(f"Aminoácido {i+1}: {original} -> {mutated} ({mut_type})")
 print(lmbda)
 
 # for i, original, mutated in result["amino_diffs"]:
