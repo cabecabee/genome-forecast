@@ -1,5 +1,5 @@
 from dicts.dict_sbs4 import dict_sbs4
-from dicts.dict_sbs4 import hotspots
+from dicts.hotspots import hotspots
 
 def prob_mut(seq):
     probabilities_mut = []
@@ -45,8 +45,7 @@ def prob_mut(seq):
         "base_central": base_central,
         "pesos": mut_pos
         })
-
-    #não sei se esta na identação correta! \/
+        
     prob_pos = []
     for i in probabilities_mut:
         tot_weight = sum(i["pesos"].values())

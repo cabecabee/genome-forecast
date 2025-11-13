@@ -1,5 +1,5 @@
 from dicts.dict_sbs4 import dict_sbs4
-from dicts.dict_sbs4 import hotspots
+from dicts.hotspots import hotspots
 from functions.duplicate import duplicate
 from functions.get_cds import get_cds
 from functions.get_weights import get_weights
@@ -76,6 +76,7 @@ for i, original, mutated in result["amino_diffs"]:
     else:
         mut_type = "sinônima"
     print(f"Aminoácido {i}: {original} -> {mutated} ({mut_type})")
+print(lmbda)
 
 # for i, original, mutated in result["amino_diffs"]:
 #     if mutated == "stop":
