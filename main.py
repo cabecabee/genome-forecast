@@ -66,19 +66,16 @@ for i in read_fasta(filepath):
     seq += i["seq"]
 p_cumulative, probabilities_mut = prob_mut(seq)
 
-looplist = []
-
-for i in range(10000):
-    mut_seq, mutations = mutate(lmbda, seq, p_cumulative, probabilities_mut)
-    result = analyze_mutations(seq, mut_seq, mutations)
-    for i, original, mutated in result["amino_diffs"]:
-        if mutated == "stop":
-            mut_type = "nonsense"
-        elif original != mutated:
-            mut_type = "missense"
-        looplist.append((i, mut_type))
-
-print(looplist)
+mut_seq, mutations = mutate(lmbda, seq, p_cumulative, probabilities_mut)
+result = analyze_mutations(seq, mut_seq, mutations)
+for i, original, mutated in result["amino_diffs"]:
+    if mutated == "stop":
+        mut_type = "nonsense"
+    elif original != mutated:
+        mut_type = "missense"
+    else:
+        mut_type = "sinônima"
+    print(f"Aminoácido {i}: {original} -> {mutated} ({mut_type})")
 
 # for i, original, mutated in result["amino_diffs"]:
 #     if mutated == "stop":
