@@ -77,6 +77,8 @@ for i, original, mutated in result["amino_diffs"]:
         mut_type = "sinônima"
     print(f"Aminoácido {i+1}: {original} -> {mutated} ({mut_type})")
 print(lmbda)
+print(seq[522:525])
+print(mut_seq[522:525])
 
 # for i, original, mutated in result["amino_diffs"]:
 #     if mutated == "stop":
