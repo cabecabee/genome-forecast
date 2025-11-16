@@ -3,6 +3,7 @@ from dicts.hotspots import hotspots
 
 def prob_mut(seq):
     probabilities_mut = []
+    weights_position = []
 
     complement = {"A": "T", "T": "A", "C": "G", "G": "C"}
 
@@ -13,7 +14,8 @@ def prob_mut(seq):
         mut_pos = {}
 
         bases = ["A", "T", "C", "G"]
-        bases.remove(base_central)
+        if base_central in bases:
+            bases.remove(base_central)
         
         for b in bases:
             chave = f"{trinuc}>{b}"
@@ -21,20 +23,25 @@ def prob_mut(seq):
             if chave in dict_sbs4:
                 prob = dict_sbs4[chave]
             else:
-                trinuc_comp = ( complement[trinuc[0]] + complement[trinuc[1]] + complement[trinuc[2]] )
+                trinuc_comp = complement[trinuc[0]] + complement[trinuc[1]] + complement[trinuc[2]]
                 b_comp = complement[b]
                 chave_comp = f"{trinuc_comp}>{b_comp}"
 
                 prob = dict_sbs4.get(chave_comp, 0)
             
-            if i in hotspots:
-                key_hotspot = f"{base_central}>{b}"
-                if key_hotspot in hotspots[i]:
-                    prob *= hotspots[i][key_hotspot]
-        
             mut_pos[b] = prob
 
         soma = sum(mut_pos.values())
+        if i in hotspots:
+            for key, mult in hotspots[i].items():
+                ref, mut = key.split(">")
+                # hotspot só vale se a base central for a ref
+                if base_central == ref:
+                    # aumenta o peso da mutação específica
+                    if mut in mut_pos:
+                        mut_pos[mut] *= mult
+        soma = sum(mut_pos.values())
+        weights_position.append(soma)
         if soma > 0:
             for b in mut_pos:
                 mut_pos[b] /= soma
@@ -45,14 +52,9 @@ def prob_mut(seq):
         "base_central": base_central,
         "pesos": mut_pos
         })
-        
-    prob_pos = []
-    for i in probabilities_mut:
-        tot_weight = sum(i["pesos"].values())
-        prob_pos.append(tot_weight)
 
-    pp_tot = sum(prob_pos)
-    prob_pos = [p / pp_tot for p in prob_pos]
+    pp_tot = sum(weights_position)
+    prob_pos = [p / pp_tot for p in weights_position]
 
     p_cumulative = []
     add = 0
