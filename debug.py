@@ -5,6 +5,7 @@ from functions.read_fasta import read_fasta
 from functions.prob_mut import prob_mut
 from functions.mutate import mutate
 from functions.analyze_mutations import analyze_mutations
+from functions.repeat_mutations import repeat_mutations
 
 lmbda = user_data()
 
@@ -15,17 +16,7 @@ for i in read_fasta("fastafiles/p53.fasta"):
     seq += i["seq"]
 p_cumulative, probabilities_mut = prob_mut(seq)
 
-mut_seq, mutations = mutate(lmbda, seq, p_cumulative, probabilities_mut)
-result = analyze_mutations(seq, mut_seq, mutations)
-
-for i, original, mutado in result["amino_diffs"]:
-    if mutado == "stop":
-        tipo = "nonsense"
-    elif original != mutado:
-        tipo = "missense"
-    else:
-        tipo = "sinônima"
-    print(f"Aminoácido {i}: {original} → {mutado} ({tipo})")
+print(repeat_mutations(lmbda, seq, p_cumulative, probabilities_mut))
 
 end = time.time()
 

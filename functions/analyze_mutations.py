@@ -47,20 +47,22 @@ def analyze_mutations(orig_seq, mut_seq, mutations):
 def translate_mut(orig_seq, mutations, codon_table):
     results = []
 
-    for nt_pos, orig_nt, new_nt in mutations:
+    for pos_1indexed, new_nt in mutations:
+        nt_pos = pos_1indexed - 1
+        orig_nt = orig_seq[nt_pos]
+
         codon_index = nt_pos // 3
         start = codon_index * 3
 
         orig_codon = orig_seq[start:start+3]
+
+        # cria o códon mutado
         mut_codon_list = list(orig_codon)
-
-        rna_nt = "U" if new_nt == "T" else new_nt
-
-        mut_codon_list[nt_pos % 3] = rna_nt
+        mut_codon_list[nt_pos % 3] = new_nt
         mut_codon = "".join(mut_codon_list)
 
-        orig_aa = codon_table.get(orig_codon, None)
-        mut_aa  = codon_table.get(mut_codon, None)
+        orig_aa = codon_table.get(orig_codon)
+        mut_aa  = codon_table.get(mut_codon)
 
         results.append((codon_index, orig_aa, mut_aa))
 
