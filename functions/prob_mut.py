@@ -22,11 +22,7 @@ def prob_mut(seq):
             if chave in dict_sbs4:
                 prob = dict_sbs4[chave]
             else:
-                trinuc_comp = (
-                    complement[trinuc[0]] +
-                    complement[trinuc[1]] +
-                    complement[trinuc[2]]
-                )
+                trinuc_comp = (complement[trinuc[0]] + complement[trinuc[1]] + complement[trinuc[2]])
                 b_comp = complement[b]
                 chave_comp = f"{trinuc_comp}>{b_comp}"
 
