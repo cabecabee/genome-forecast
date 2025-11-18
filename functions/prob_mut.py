@@ -3,6 +3,7 @@ from dicts.hotspots import hotspots
 
 def prob_mut(seq):
     probabilities_mut = []
+    prob_pos_raw = []
 
     complement = {"A": "T", "T": "A", "C": "G", "G": "C"}
 
@@ -21,7 +22,11 @@ def prob_mut(seq):
             if chave in dict_sbs4:
                 prob = dict_sbs4[chave]
             else:
-                trinuc_comp = ( complement[trinuc[0]] + complement[trinuc[1]] + complement[trinuc[2]] )
+                trinuc_comp = (
+                    complement[trinuc[0]] +
+                    complement[trinuc[1]] +
+                    complement[trinuc[2]]
+                )
                 b_comp = complement[b]
                 chave_comp = f"{trinuc_comp}>{b_comp}"
 
@@ -35,24 +40,25 @@ def prob_mut(seq):
             mut_pos[b] = prob
 
         soma = sum(mut_pos.values())
+
+        prob_pos_raw.append(soma)
+
         if soma > 0:
             for b in mut_pos:
                 mut_pos[b] /= soma
 
         probabilities_mut.append({
-        "pos": i,
-        "trinuc": trinuc,
-        "base_central": base_central,
-        "pesos": mut_pos
+            "pos": i,
+            "trinuc": trinuc,
+            "base_central": base_central,
+            "pesos": mut_pos
         })
         
-    prob_pos = []
-    for i in probabilities_mut:
-        tot_weight = sum(i["pesos"].values())
-        prob_pos.append(tot_weight)
-
-    pp_tot = sum(prob_pos)
-    prob_pos = [p / pp_tot for p in prob_pos]
+    pp_tot = sum(prob_pos_raw)
+    if pp_tot > 0:
+        prob_pos = [p / pp_tot for p in prob_pos_raw]
+    else:
+        prob_pos = [0 for _ in prob_pos_raw]
 
     p_cumulative = []
     add = 0
