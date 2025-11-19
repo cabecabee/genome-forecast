@@ -1,7 +1,7 @@
 from functions.isdna import isdna
 
 def read_fasta(filepath):
-    valid_exts = (".fasta", ".fas", ".fa", ".frn", ".fna", ".ffn")
+    valid_exts = (".fasta", ".fas", ".fa", ".fna", ".ffn")
 
     if not filepath.endswith(valid_exts):
         print("O arquivo não é uma extensão FASTA de nucleotídeos. (.fasta, .fna, .ffn, .fa, .fas)")

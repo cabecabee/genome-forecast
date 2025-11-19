@@ -3,8 +3,6 @@ import time
 from functions.user_data import user_data
 from functions.read_fasta import read_fasta
 from functions.prob_mut import prob_mut
-from functions.mutate import mutate
-from functions.analyze_mutations import analyze_mutations
 from functions.repeat_mutations import repeat_mutations
 
 lmbda = user_data()
