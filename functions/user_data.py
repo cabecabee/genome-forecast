@@ -35,12 +35,12 @@ def user_data():
         # Pergunta 3
         while True:
             print("")
-            print("Há quanto tempo você fuma em meses?")
-            period = input("Tempo em meses: ")
+            print("Há quanto tempo você fuma em anos e meses? (anos, meses)")
+            period_a, period_m = input("Tempo: ").split(", ")
             print("")
 
             try:
-                n_period = int(period)
+                n_period = int(period_a) * 12 + int(period_m)
                 if n_period >= 1:
                     break
                 else:
