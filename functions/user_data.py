@@ -32,24 +32,45 @@ def user_data():
             except ValueError:
                 print("A resposta deve ser em número(s) inteiro(s)!")
 
-        # Pergunta 3
         while True:
             print("")
             print("Há quanto tempo você fuma em anos e meses? (anos, meses)")
-            period_a, period_m = input("Tempo: ").split(", ")
-            print("")
-
             try:
-                n_period = int(period_a) * 12 + int(period_m)
-                if n_period >= 1:
+                period_a, period_m = [int(x.strip()) for x in input("Tempo: ").split(",")]
+            except ValueError:
+                print("A resposta deve ser em números inteiros!")
+                continue
+
+            print("")
+            print("Você quer uma previsão para o futuro (1) ou só quer saber uma previsão do momento atual (2)?")
+            while True:
+                prevdec = input("Resposta (1/2): ").strip()
+                if prevdec in ["1", "2"]:
                     break
                 else:
-                    print("Isto não configura um hábito.")
-            except ValueError:
-                print("A resposta deve ser em número(s) inteiro(s)!")
+                    print("Resposta inválida! Digite '1' ou '2'.\n")
+
+            if prevdec == "1":
+                print("")
+                print("Para quanto tempo você quer essa previsão? (anos, meses)")
+                try:
+                    periodp_a, periodp_m = [int(x.strip()) for x in input("Tempo: ").split(",")]
+                except ValueError:
+                    print("A resposta deve ser em números inteiros!")
+                    continue
+
+                n_period = (period_a * 12 + period_m) + (periodp_a * 12 + periodp_m)
+
+            else:
+                n_period = (period_a * 12 + period_m)
+
+            if n_period >= 1:
+                break
+            else:
+                print("Isto não configura um hábito.")
     except (EOFError, KeyboardInterrupt):
-            print("\nPrograma encerrado pelo usuário.")
-            return
+        print("\nPrograma encerrado pelo usuário.")
+        return
                 
     pack = n_intensity / 20 #nº de maços
     years = n_period / 12 #transferencia para anos
