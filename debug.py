@@ -14,7 +14,20 @@ for i in read_fasta("fastafiles/p53.fasta"):
     seq += i["seq"]
 p_cumulative, probabilities_mut = prob_mut(seq)
 
-print(repeat_mutations(lmbda, seq, p_cumulative, probabilities_mut))
+domaintable = repeat_mutations(lmbda, seq, p_cumulative, probabilities_mut, 1000)
+
+soma = sum(
+    count
+    for domain in domaintable.values()
+    for count in domain.values()
+)
+
+percent = {
+    domain: {mut_type: (count / soma) * 100 for mut_type, count in subdict.items()}
+    for domain, subdict in domaintable.items()
+}
+
+print(percent)
 
 end = time.time()
 
