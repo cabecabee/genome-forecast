@@ -39,7 +39,7 @@ if usecustomfasta == "s":
     root.withdraw() # esconde a janela do tkinter que é inútil para nós no momento
     filepath = askopenfilename(
         title="Selecione o arquivo FASTA",
-        filemut_types=[
+        filetypes=[
             ("FASTA files", "*.fasta"),
             ("FASTA Nucleotide", "*.fna"),
             ("FASTA Fragments", "*.ffn"),
