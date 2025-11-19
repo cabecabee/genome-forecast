@@ -15,6 +15,7 @@ from functions.mat_mut import mat_mut
 from functions.resource_path import resource_path
 from functions.sorteio_pond import sorteio_pond
 from functions.analyze_mutations import analyze_mutations
+from functions.repeat_mutations import repeat_mutations
 import sys
 
 from tkinter import Tk # interface gráfica para escolher um arquivo fasta
@@ -66,17 +67,39 @@ for i in read_fasta(filepath):
     seq += i["seq"]
 p_cumulative, probabilities_mut = prob_mut(seq)
 
-mut_seq, mutations = mutate(lmbda, seq, p_cumulative, probabilities_mut)
-result = analyze_mutations(seq, mut_seq, mutations)
-for i, original, mutated in result["amino_diffs"]:
-    if mutated == "stop":
-        mut_type = "nonsense"
-    elif original != mutated:
-        mut_type = "missense"
-    else:
-        mut_type = "sinônima"
-    print(f"Aminoácido {i+1}: {original} -> {mutated} ({mut_type})")
-print(lmbda)
+domaintable = repeat_mutations(lmbda, seq, p_cumulative, probabilities_mut, 10000)
+
+soma = sum(
+    count
+    for domain in domaintable.values()
+    for count in domain.values()
+)
+
+percent = {
+    domain: {mut_type: (count / soma) * 100 for mut_type, count in subdict.items()}
+    for domain, subdict in domaintable.items()
+}
+
+print(f"""
+Em seu DNA: \n 
+{percent['tad']['missense']:.3f}% das mutações foram missense no domínio TAD e
+{percent['tad']['nonsense']:.3f}% foram nonsense no domínio TAD.
+
+{percent['prd']['missense']:.3f}% foram missense no domínio PRD e
+{percent['prd']['nonsense']:.3f}% foram nonsense no domínio PRD.
+
+{percent['dbd']['missense']:.3f}% foram missense no domínio DBD e
+{percent['dbd']['nonsense']:.3f}% foram nonsense no domínio DBD.
+
+{percent['nls']['missense']:.3f}% foram missense no domínio NLS e
+{percent['nls']['nonsense']:.3f}% foram nonsense no domínio NLS.
+
+{percent['od']['missense']:.3f}% foram missense no domínio OD e
+{percent['od']['nonsense']:.3f}% foram nonsense no domínio OD.
+
+{percent['ctd']['missense']:.3f}% foram missense no domínio CTD e
+{percent['ctd']['nonsense']:.3f}% foram nonsense no domínio CTD.
+""")
 
 # for i, original, mutated in result["amino_diffs"]:
 #     if mutated == "stop":
