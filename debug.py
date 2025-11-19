@@ -14,7 +14,7 @@ for i in read_fasta("fastafiles/p53.fasta"):
     seq += i["seq"]
 p_cumulative, probabilities_mut = prob_mut(seq)
 
-domaintable = repeat_mutations(lmbda, seq, p_cumulative, probabilities_mut, 1000)
+domaintable = repeat_mutations(lmbda, seq, p_cumulative, probabilities_mut, 10000)
 
 soma = sum(
     count
