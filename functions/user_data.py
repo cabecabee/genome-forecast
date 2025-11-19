@@ -94,7 +94,7 @@ def user_data():
     # ^ comentado pois isso não deve aparecer para o usuário no programa final
 
     # todos os valores atribuidos diretamente a uma varíavel acima, provêm de dados totalmente cíentificos.
-    return lambida
+    return lambida, prevdec
 
 # Alta complexidade para evitar exceções pois essa parte do programa depende do usuário,
 # Logo é de extrema importância que não deixemos o usuário cometer erros que inutilizem o programa.

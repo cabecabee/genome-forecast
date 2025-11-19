@@ -5,7 +5,7 @@ from functions.read_fasta import read_fasta
 from functions.prob_mut import prob_mut
 from functions.repeat_mutations import repeat_mutations
 
-lmbda = user_data()
+lmbda, prevdec = user_data()
 
 start = time.time()
 

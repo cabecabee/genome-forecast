@@ -56,7 +56,7 @@ if usecustomfasta == "s":
 elif usecustomfasta == "n":
     filepath = resource_path("fastafiles/p53.fasta")
 
-lmbda = user_data()
+lmbda, prevdec = user_data()
 
 if lmbda is None or lmbda == 0:
     input("\nPrograma finalizado. Pressione ENTER para sair...")
@@ -80,8 +80,14 @@ percent = {
     for domain, subdict in domaintable.items()
 }
 
+if prevdec == 1:
+    header = "Levando em consideração o tempo de previsão que você selecionou, estima-se que o seu DNA apresenta:"
+else:
+    header = "No momento atual, estima-se que o seu DNA apresenta:"
+
 print(f"""
-Em seu DNA: \n 
+{header}
+
 {percent['tad']['missense']:.3f}% das mutações foram missense no domínio TAD e
 {percent['tad']['nonsense']:.3f}% foram nonsense no domínio TAD.
 
