@@ -80,7 +80,7 @@ percent = {
     for domain, subdict in domaintable.items()
 }
 
-if prevdec == 1:
+if prevdec == '1':
     header = "Levando em consideração o tempo de previsão que você selecionou, estima-se que o seu DNA apresenta:"
 else:
     header = "No momento atual, estima-se que o seu DNA apresenta:"
