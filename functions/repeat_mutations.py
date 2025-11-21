@@ -6,14 +6,14 @@ from dicts.domains import domains
 
 # ☹️
 
-def repeat_mutations(lmbda, seq, p_cumulative, probabilities_mut, loop_amount=10000):
+def repeat_mutations(lmbda, seq, p_cumulative, substitution_probs, loop_amount=10000):
 
     accumulator_table = {
         domain: {"missense": 0, "nonsense": 0} for domain in domains.keys()
     }
 
     for i in range(loop_amount):
-        mut_seq, mutations = mutate(lmbda, seq, p_cumulative, probabilities_mut)
+        mut_seq, mutations = mutate(lmbda, seq, p_cumulative, substitution_probs)
         result = analyze_mutations(seq, mut_seq, mutations)
         current_domain = verify_mutations(result["mut_types"])
         for domain in domains.keys():

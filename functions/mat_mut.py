@@ -1,12 +1,12 @@
 from functions.sorteio_pond import sorteio_pond
 import random
-def mat_mut(lambida, p_cumulative, probabilities_mut):
+def mat_mut(lambida, p_cumulative, substitution_probs):
   mutate = []
   for i in range(round(lambida)):
     #escolha da posição
     p_chosen = sorteio_pond(p_cumulative)
     #verifica pesos desta pos
-    b_weights = probabilities_mut[p_chosen]["pesos"]
+    b_weights = substitution_probs[p_chosen]["probs"]
 
     #cria regua cumulativa local para as mut
     local_cumulative = []
@@ -24,6 +24,6 @@ def mat_mut(lambida, p_cumulative, probabilities_mut):
         break
         
     if new_base:
-            mutate.append((probabilities_mut[p_chosen]["pos"], new_base))
+            mutate.append((substitution_probs[p_chosen]["pos"], new_base))
       
   return mutate

@@ -2,64 +2,74 @@ from dicts.dict_sbs4 import dict_sbs4
 from dicts.hotspots import hotspots
 
 def prob_mut(seq):
-    probabilities_mut = []
-    prob_pos_raw = []
-
     complement = {"A": "T", "T": "A", "C": "G", "G": "C"}
 
+    totals = []
+    substitution_probs = []
+
     for i in range(1, len(seq)-1):
+        original = seq[i]
         trinuc = seq[i-1] + seq[i] + seq[i+1]
-        base_central = seq[i]
 
-        mut_pos = {}
+        rates = {}
 
-        bases = ["A", "T", "C", "G"]
-        bases.remove(base_central)
-        
-        for b in bases:
-            chave = f"{trinuc}>{b}"
-            
-            if chave in dict_sbs4:
-                prob = dict_sbs4[chave]
+        for b in ["A", "T", "C", "G"]:
+            if b == original: # para não mutar para a mesma base
+                continue
+
+            key = f"{trinuc}>{b}"
+
+            if key in dict_sbs4:
+                rate = dict_sbs4[key]
             else:
-                trinuc_comp = (complement[trinuc[0]] + complement[trinuc[1]] + complement[trinuc[2]])
+                trinuc_comp = (complement[trinuc[0]] +
+                               complement[trinuc[1]] +
+                               complement[trinuc[2]])
+
                 b_comp = complement[b]
-                chave_comp = f"{trinuc_comp}>{b_comp}"
+                key_comp = f"{trinuc_comp}>{b_comp}"
 
-                prob = dict_sbs4.get(chave_comp, 0)
-            
-            if i in hotspots:
-                key_hotspot = f"{base_central}>{b}"
-                if key_hotspot in hotspots[i]:
-                    prob *= hotspots[i][key_hotspot]
-        
-            mut_pos[b] = prob
+                rate = dict_sbs4.get(key_comp, 0)
 
-        soma = sum(mut_pos.values())
+            rates[b] = rate
 
-        prob_pos_raw.append(soma)
+        total_rate = sum(rates.values())
 
-        if soma > 0:
-            for b in mut_pos:
-                mut_pos[b] /= soma
+        if i in hotspots:
+            for mut_key, fold in hotspots[i].items():
 
-        probabilities_mut.append({
+                old_base, new_base = mut_key.split(">")
+                if original == old_base and new_base in rates:
+                    rates[new_base] *= fold
+
+            total_rate = sum(rates.values())
+
+        totals.append(total_rate)
+
+        if total_rate > 0:
+            probs = {b: (rates[b] / total_rate) for b in rates}
+        else:
+            probs = {b: 0 for b in rates}
+
+        substitution_probs.append({
             "pos": i,
+            "original": original,
             "trinuc": trinuc,
-            "base_central": base_central,
-            "pesos": mut_pos
+            "rates": rates,
+            "probs": probs
         })
-        
-    pp_tot = sum(prob_pos_raw)
-    if pp_tot > 0:
-        prob_pos = [p / pp_tot for p in prob_pos_raw]
+
+    total_sum = sum(totals)
+
+    if total_sum > 0:
+        normalized = [t / total_sum for t in totals]
     else:
-        prob_pos = [0 for _ in prob_pos_raw]
+        normalized = [0] * len(totals)
 
     p_cumulative = []
-    add = 0
-    for p in prob_pos:
-        add += p
-        p_cumulative.append(add)
+    running = 0
+    for n in normalized:
+        running += n
+        p_cumulative.append(running)
 
-    return (p_cumulative, probabilities_mut)
+    return p_cumulative, substitution_probs
