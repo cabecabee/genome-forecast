@@ -16,7 +16,7 @@ def verify_mutations(mutations):
         if domain is not None:
             counts[domain][mut_type] += 1
 
-            if mut_type == "missense": # se for missense verifica se é conservativa
+            if domain == "nls" and mut_type == "missense": # se estar no dominio nls e for missense verifica se é conservativa
                 if mutated_aa in conservativity[original_aa]["conservative"]:
                     counts[domain]["missense_conservative"] += 1
                 else:
