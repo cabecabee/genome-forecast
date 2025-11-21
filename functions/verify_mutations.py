@@ -1,21 +1,31 @@
 from dicts.domains import domains
-
+from dicts.conservativity import conservativity
 def verify_mutations(mutations):
-    # aqui a função vai retornar um dict contendo o dominio e a quantidade de mutações missense e nonsense nele
     counts = {
-        domain: {"missense": 0, "nonsense": 0}
+        domain: {
+            "missense": 0,
+            "nonsense": 0,
+            "missense_conservative": 0,
+            "missense_non_conservative": 0
+        }
         for domain in domains.keys()
     }
 
-    for pos, mut_type in mutations:
+    for pos, mut_type, original_aa, mutated_aa in mutations:
         domain = get_domain(pos)
         if domain is not None:
             counts[domain][mut_type] += 1
 
+            if mut_type == "missense": # se for missense verifica se é conservativa
+                if mutated_aa in conservativity[original_aa]["conservative"]:
+                    counts[domain]["missense_conservative"] += 1
+                else:
+                    counts[domain]["missense_non_conservative"] += 1
+
     return counts
 
-def get_domain(pos): # decidi por colocar a função aqui pois só é usada para realizar o verify_mutations, e não quero poluir a pasta functions mais do que já está
-        for name, coords in domains.items():
-            if coords["start"] <= pos + 1 <= coords["end"]:
-                return name
-        return None
+def get_domain(pos):
+    for name, coords in domains.items():
+        if coords["start"] <= pos + 1 <= coords["end"]:
+            return name
+    return None
