@@ -24,6 +24,7 @@ def analyze_mutations(orig_seq, mut_seq, mutations):
         "GAA": "Glu", "GAG": "Glu",
         "GGU": "Gly", "GGC": "Gly", "GGA": "Gly", "GGG": "Gly"
     }
+
     orig_rna = transcript(orig_seq)
 
     codon_changes = translate_mut(orig_rna, mutations, codon_table)
@@ -32,10 +33,14 @@ def analyze_mutations(orig_seq, mut_seq, mutations):
     mut_types = []
 
     for codon_index, orig_aa, mut_aa in codon_changes:
+
         if orig_aa != mut_aa:
+
             mut_type = "nonsense" if mut_aa == "stop" else "missense"
+
             diffs.append((codon_index, orig_aa, mut_aa))
-            mut_types.append((codon_index, mut_type))
+
+            mut_types.append((codon_index, mut_type, orig_aa, mut_aa))
 
     return {
         "mut_amount": len(mutations),
@@ -43,6 +48,7 @@ def analyze_mutations(orig_seq, mut_seq, mutations):
         "amino_diffs": diffs,
         "mut_types": mut_types
     }
+
 
 def translate_mut(orig_seq, mutations, codon_table):
     results = []
@@ -56,7 +62,6 @@ def translate_mut(orig_seq, mutations, codon_table):
 
         orig_codon = orig_seq[start:start+3]
 
-        # cria o códon mutado
         mut_codon_list = list(orig_codon)
         mut_codon_list[nt_pos % 3] = new_nt
         mut_codon = "".join(mut_codon_list)

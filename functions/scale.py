@@ -8,44 +8,62 @@ DOMAIN_WEIGHTS = {
     "ctd": 2
 }
 
-def mutation_weight(domain, mut_type, conservative=None): # obter o peso de uma mutação
-    # nonsense dá o peso maximo
-    if mut_type == "nonsense":
-        return 10
+def normalize(accumulator, lambda_value):
 
-    # missense depende do dominio
-    if mut_type == "missense":
+    # 1 — soma total das categorias
+    total = 0
+    for d in accumulator.values():
+        total += d.get("missense", 0)
+        total += d.get("nonsense", 0)
+        total += d.get("missense_conservative", 0)
+        total += d.get("missense_non_conservative", 0)
 
-        # caso for nls, checa se é conservativa ou não
-        if domain == "nls":
-            if conservative:
-                return DOMAIN_WEIGHTS["nls_conservative"]
-            else:
-                return DOMAIN_WEIGHTS["nls_non_conservative"]
+    if total == 0:
+        # sem mutações nos loops — retorna tudo zero
+        return {
+            dom: {
+                "missense": 0,
+                "nonsense": 0,
+                "missense_conservative": 0,
+                "missense_non_conservative": 0
+            } for dom in accumulator
+        }
 
-        # para os outros dominios, faz o procedimento padrão
-        return DOMAIN_WEIGHTS[domain]
+    # 2 — converte accumulator → expected_counts baseados em λ
+    expected = {}
 
-    return 0 # fallback
+    for dom, d in accumulator.items():
 
-def calculate_risk(counts): # risco total, recebe counts de verify_mutations
+        expected[dom] = {}
+
+        for key in ["missense", "nonsense",
+                    "missense_conservative",
+                    "missense_non_conservative"]:
+
+            frac = d.get(key, 0) / total
+            expected[dom][key] = frac * lambda_value   # <-- soma = λ
+
+    return expected
+
+def calculate_risk(counts):
+
     total_score = 0
 
     for domain, data in counts.items():
 
+        # converte valores esperados → valores reais aproximados
+        missense = data["missense"]
+        nonsense = data["nonsense"]
+        mc = data["missense_conservative"]
+        mnc = data["missense_non_conservative"]
+
         # nonsense
-        total_score += data["nonsense"] * 10
+        total_score += nonsense * 10
 
-        # missense, se for nls tem dois casos separados
         if domain == "nls":
-            total_score += data["missense_conservative"] * DOMAIN_WEIGHTS["nls_conservative"]
-            total_score += data["missense_non_conservative"] * DOMAIN_WEIGHTS["nls_non_conservative"]
+            total_score += mc * DOMAIN_WEIGHTS["nls_conservative"]
+            total_score += mnc * DOMAIN_WEIGHTS["nls_non_conservative"]
         else:
-            # missense comum
-            total_score += data["missense"] * DOMAIN_WEIGHTS[domain]
+            total_score += missense * DOMAIN_WEIGHTS[domain]
 
-    # normaliza para 1-10
-    if total_score > 10:
-        total_score = 10
-
-    return total_score
+    return min(total_score, 10)

@@ -9,7 +9,12 @@ from dicts.domains import domains
 def repeat_mutations(lmbda, seq, p_cumulative, substitution_probs, loop_amount=10000):
 
     accumulator_table = {
-        domain: {"missense": 0, "nonsense": 0} for domain in domains.keys()
+        domain: {"missense": 0,
+                 "nonsense": 0,
+                 "missense_conservative": 0,
+                 "missense_non_conservative": 0
+        }
+        for domain in domains.keys()
     }
 
     for i in range(loop_amount):
@@ -17,7 +22,11 @@ def repeat_mutations(lmbda, seq, p_cumulative, substitution_probs, loop_amount=1
         result = analyze_mutations(seq, mut_seq, mutations)
         current_domain = verify_mutations(result["mut_types"])
         for domain in domains.keys():
-            accumulator_table[domain]["missense"] += current_domain[domain]["missense"]
+            if domain == "nls":
+                accumulator_table[domain]["missense_conservative"] += current_domain[domain]["missense_conservative"]
+                accumulator_table[domain]["missense_non_conservative"] += current_domain[domain]["missense_non_conservative"]
+            else:
+                accumulator_table[domain]["missense"] += current_domain[domain]["missense"]
             accumulator_table[domain]["nonsense"] += current_domain[domain]["nonsense"]
     
     return accumulator_table
