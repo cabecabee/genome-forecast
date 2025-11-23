@@ -18,6 +18,7 @@ from functions.analyze_mutations import analyze_mutations
 from functions.repeat_mutations import repeat_mutations
 from functions.scale import normalize
 from functions.scale import calculate_risk
+from functions.pelomenosum import pelomenosum
 import sys
 
 from tkinter import Tk # interface gráfica para escolher um arquivo fasta
@@ -69,11 +70,15 @@ for i in read_fasta(filepath):
     seq += i["seq"]
 p_cumulative, probabilities_mut = prob_mut(seq)
 
-domaintable = repeat_mutations(lmbda, seq, p_cumulative, probabilities_mut, 10000)
-normalized = normalize(domaintable, lmbda)
-risk_score = calculate_risk(normalized)
+domaintable = pelomenosum(lmbda, seq, p_cumulative, probabilities_mut)
+# normalized = normalize(domaintable, lmbda)
+# risk_score = calculate_risk(normalized)
 
-print(risk_score)
+# print(risk_score)
+
+print(domaintable)
+
+print(lmbda)
 
 # soma = sum(
 #     count
