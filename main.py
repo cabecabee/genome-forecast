@@ -20,6 +20,7 @@ from functions.scale import normalize
 from functions.scale import calculate_risk
 from functions.pelomenosum import pelomenosum
 import sys
+import re
 
 from tkinter import Tk # interface gráfica para escolher um arquivo fasta
 from tkinter.filedialog import askopenfilename
@@ -65,9 +66,13 @@ if lmbda is None or lmbda == 0:
     input("\nPrograma finalizado. Pressione ENTER para sair...")
     sys.exit()
 
-seq = ""
-for i in read_fasta(filepath):
-    seq += i["seq"]
+try:
+    seq = "".join(i["seq"] for i in read_fasta(filepath))
+except Exception:
+    print("Erro: o arquivo selecionado não é um FASTA válido.")
+    input("\nPrograma finalizado. Pressione ENTER para sair...")
+    sys.exit()
+
 p_cumulative, probabilities_mut = prob_mut(seq)
 
 pelomenosumtabela = pelomenosum(lmbda, seq, p_cumulative, probabilities_mut)
@@ -80,47 +85,77 @@ domaintable = repeat_mutations(lmbda, seq, p_cumulative, probabilities_mut)
 for k in pelomenosumtabela:
     pelomenosumtabela[k] *= 100
 
-print("tabela de dominios: ", pelomenosumtabela)
+print("As porcentagens abaixo representam a CHANCE ABSOLUTA de ocorrer pelo menos\n"
+      "uma mutação em cada domínio, considerando a exposição informada.\n"
+      "Esses valores NÃO somam 100%, pois cada domínio é independente.\n")
 
-print("lambda: ", lmbda)
-
-soma = sum(
-    count
-    for domain in domaintable.values()
-    for count in domain.values()
-)
-
-percent = {
-    domain: {mut_type: (count / soma) * 100 for mut_type, count in subdict.items()}
-    for domain, subdict in domaintable.items()
+# Agrupar automaticamente por domínio real
+dominios = {
+    "Domínio 1 (TAD)": ["dominio1missense", "dominio1nonsense"],
+    "Domínio 2 (PRD)": ["dominio2missense", "dominio2nonsense"],
+    "Domínio 3 (DBD)": ["dominio3missense", "dominio3nonsense"],
+    "Domínio 4 (NLS)": ["dominio4missense_conservative", "dominio4missense_non_conservative", "dominio4nonsense"],
+    "Domínio 5 (OD)": ["dominio5missense", "dominio5nonsense"],
+    "Domínio 6 (CTD)": ["dominio6missense", "dominio6nonsense"]
 }
 
-if prevdec == '1':
-    header = "Levando em consideração o tempo de previsão que você selecionou, estima-se que o seu DNA apresenta:"
-else:
-    header = "No momento atual, estima-se que o seu DNA apresenta:"
+for nome, keys in dominios.items():
+    print(f"--- {nome} ---")
+    for k in keys:
+        valor = pelomenosumtabela.get(k, None)
+        if valor is not None:
 
-print(f"""
-{header}
+            label = re.sub(r"^dominio\d+", "", k)
 
-{percent['tad']['missense']:.3f}% das mutações foram missense no domínio TAD e
-{percent['tad']['nonsense']:.3f}% foram nonsense no domínio TAD.
+            label = label.replace("missense_conservative", "missense conservativa")
+            label = label.replace("missense_non_conservative", "missense não conservativa")
 
-{percent['prd']['missense']:.3f}% foram missense no domínio PRD e
-{percent['prd']['nonsense']:.3f}% foram nonsense no domínio PRD.
+            label = label.replace("_", " ").capitalize()
 
-{percent['dbd']['missense']:.3f}% foram missense no domínio DBD e
-{percent['dbd']['nonsense']:.3f}% foram nonsense no domínio DBD.
+            print(f"{label}: {valor:.3f}%")
+    print()
 
-{percent['nls']['missense']:.3f}% foram missense no domínio NLS e
-{percent['nls']['nonsense']:.3f}% foram nonsense no domínio NLS.
+print("=======================================================================\n")
 
-{percent['od']['missense']:.3f}% foram missense no domínio OD e
-{percent['od']['nonsense']:.3f}% foram nonsense no domínio OD.
+# print("lambda: ", lmbda)
 
-{percent['ctd']['missense']:.3f}% foram missense no domínio CTD e
-{percent['ctd']['nonsense']:.3f}% foram nonsense no domínio CTD.
-""")
+# soma = sum(
+#     count
+#     for domain in domaintable.values()
+#     for count in domain.values()
+# )
+
+# percent = {
+#     domain: {mut_type: (count / soma) * 100 for mut_type, count in subdict.items()}
+#     for domain, subdict in domaintable.items()
+# }
+
+# if prevdec == '1':
+#     header = "Levando em consideração o tempo de previsão que você selecionou, estima-se que o seu DNA apresenta:"
+# else:
+#     header = "No momento atual, estima-se que o seu DNA apresenta:"
+
+# print(f"""
+# {header}
+
+# {percent['tad']['missense']:.3f}% das mutações foram missense no domínio TAD e
+# {percent['tad']['nonsense']:.3f}% foram nonsense no domínio TAD.
+
+# {percent['prd']['missense']:.3f}% foram missense no domínio PRD e
+# {percent['prd']['nonsense']:.3f}% foram nonsense no domínio PRD.
+
+# {percent['dbd']['missense']:.3f}% foram missense no domínio DBD e
+# {percent['dbd']['nonsense']:.3f}% foram nonsense no domínio DBD.
+
+# {percent['nls']['missense']:.3f}% foram missense no domínio NLS e
+# {percent['nls']['nonsense']:.3f}% foram nonsense no domínio NLS.
+
+# {percent['od']['missense']:.3f}% foram missense no domínio OD e
+# {percent['od']['nonsense']:.3f}% foram nonsense no domínio OD.
+
+# {percent['ctd']['missense']:.3f}% foram missense no domínio CTD e
+# {percent['ctd']['nonsense']:.3f}% foram nonsense no domínio CTD.
+# """)
 
 input("\nPrograma finalizado. Pressione ENTER para sair...")
 
