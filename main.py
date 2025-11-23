@@ -76,6 +76,9 @@ domaintable = pelomenosum(lmbda, seq, p_cumulative, probabilities_mut)
 
 # print(risk_score)
 
+for k in domaintable:
+    domaintable[k] *= 100
+
 print(domaintable)
 
 print(lmbda)
