@@ -2,7 +2,7 @@ from functions.repeat_mutations import repeat_mutations
 from functions.mat_mut import mat_mut
 def pelomenosum(lmbda, seq, p_cumulative, probabilities_mut):
     E = 2.718281828459
-    domaintable = repeat_mutations(lmbda, seq, p_cumulative, probabilities_mut, 10000)
+    domaintable = repeat_mutations(lmbda, seq, p_cumulative, probabilities_mut, 50000)
     soma = sum(
         count
         for domain in domaintable.values()

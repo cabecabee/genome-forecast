@@ -70,56 +70,57 @@ for i in read_fasta(filepath):
     seq += i["seq"]
 p_cumulative, probabilities_mut = prob_mut(seq)
 
-domaintable = pelomenosum(lmbda, seq, p_cumulative, probabilities_mut)
+pelomenosumtabela = pelomenosum(lmbda, seq, p_cumulative, probabilities_mut)
+domaintable = repeat_mutations(lmbda, seq, p_cumulative, probabilities_mut)
 # normalized = normalize(domaintable, lmbda)
 # risk_score = calculate_risk(normalized)
 
 # print(risk_score)
 
-for k in domaintable:
-    domaintable[k] *= 100
+for k in pelomenosumtabela:
+    pelomenosumtabela[k] *= 100
 
-print(domaintable)
+print("tabela de dominios: ", pelomenosumtabela)
 
-print(lmbda)
+print("lambda: ", lmbda)
 
-# soma = sum(
-#     count
-#     for domain in domaintable.values()
-#     for count in domain.values()
-# )
+soma = sum(
+    count
+    for domain in domaintable.values()
+    for count in domain.values()
+)
 
-# percent = {
-#     domain: {mut_type: (count / soma) * 100 for mut_type, count in subdict.items()}
-#     for domain, subdict in domaintable.items()
-# }
+percent = {
+    domain: {mut_type: (count / soma) * 100 for mut_type, count in subdict.items()}
+    for domain, subdict in domaintable.items()
+}
 
-# if prevdec == '1':
-#     header = "Levando em consideração o tempo de previsão que você selecionou, estima-se que o seu DNA apresenta:"
-# else:
-#     header = "No momento atual, estima-se que o seu DNA apresenta:"
+if prevdec == '1':
+    header = "Levando em consideração o tempo de previsão que você selecionou, estima-se que o seu DNA apresenta:"
+else:
+    header = "No momento atual, estima-se que o seu DNA apresenta:"
 
-# print(f"""
-# {header}
+print(f"""
+{header}
 
-# {percent['tad']['missense']:.3f}% das mutações foram missense no domínio TAD e
-# {percent['tad']['nonsense']:.3f}% foram nonsense no domínio TAD.
+{percent['tad']['missense']:.3f}% das mutações foram missense no domínio TAD e
+{percent['tad']['nonsense']:.3f}% foram nonsense no domínio TAD.
 
-# {percent['prd']['missense']:.3f}% foram missense no domínio PRD e
-# {percent['prd']['nonsense']:.3f}% foram nonsense no domínio PRD.
+{percent['prd']['missense']:.3f}% foram missense no domínio PRD e
+{percent['prd']['nonsense']:.3f}% foram nonsense no domínio PRD.
 
-# {percent['dbd']['missense']:.3f}% foram missense no domínio DBD e
-# {percent['dbd']['nonsense']:.3f}% foram nonsense no domínio DBD.
+{percent['dbd']['missense']:.3f}% foram missense no domínio DBD e
+{percent['dbd']['nonsense']:.3f}% foram nonsense no domínio DBD.
 
-# {percent['nls']['missense']:.3f}% foram missense no domínio NLS e
-# {percent['nls']['nonsense']:.3f}% foram nonsense no domínio NLS.
+{percent['nls']['missense']:.3f}% foram missense no domínio NLS e
+{percent['nls']['nonsense']:.3f}% foram nonsense no domínio NLS.
 
-# {percent['od']['missense']:.3f}% foram missense no domínio OD e
-# {percent['od']['nonsense']:.3f}% foram nonsense no domínio OD.
+{percent['od']['missense']:.3f}% foram missense no domínio OD e
+{percent['od']['nonsense']:.3f}% foram nonsense no domínio OD.
 
-# {percent['ctd']['missense']:.3f}% foram missense no domínio CTD e
-# {percent['ctd']['nonsense']:.3f}% foram nonsense no domínio CTD.
-# """)
+{percent['ctd']['missense']:.3f}% foram missense no domínio CTD e
+{percent['ctd']['nonsense']:.3f}% foram nonsense no domínio CTD.
+""")
 
 input("\nPrograma finalizado. Pressione ENTER para sair...")
 
