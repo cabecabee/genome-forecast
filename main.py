@@ -115,7 +115,7 @@ for nome, keys in dominios.items():
 
 for nome, risco in risco_por_dominio.items():
     dano = descricao_dominios.get(nome, "alteração funcional")
-    print(f"→ {nome}: {risco:.3f}% de chance de causar {dano}.")
+    print(f"-> {nome}: {risco:.3f}% de chance de causar {dano}.")
 print()
 
 print("=======================================================================\n")
