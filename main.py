@@ -80,10 +80,23 @@ domaintable = repeat_mutations(lmbda, seq, p_cumulative, probabilities_mut)
 
 for k in pelomenosumtabela:
     pelomenosumtabela[k] *= 100
-
+nonsense_total = sum(
+    value for key, value in pelomenosumtabela.items()
+    if "nonsense" in key
+)
+print("=======================================================================\n")
 print("As porcentagens abaixo representam a CHANCE ABSOLUTA de ocorrer pelo menos\n"
       "uma mutação em cada domínio, considerando a exposição informada.\n"
       "Esses valores NÃO somam 100%, pois cada domínio é independente.\n")
+
+descricao_dominios = {
+    "Domínio 1 (TAD)": "diminuição da ativação de genes de resposta ao dano",
+    "Domínio 2 (PRD)": "falha parcial na capacidade da p53 de recrutar proteínas de reparo",
+    "Domínio 3 (DBD)": "redução da capacidade de ligação ao DNA, prejudicando a supressão tumoral",
+    "Domínio 4 (NLS)": "dificuldade de transportar a p53 para o núcleo da célula",
+    "Domínio 5 (OD)": "problemas na formação do tetrâmero funcional da p53",
+    "Domínio 6 (CTD)": "alterações na regulação fina e reconhecimento de DNA danificado"
+}
 
 dominios = {
     "Domínio 1 (TAD)": ["dominio1missense", "dominio1nonsense"],
@@ -94,23 +107,30 @@ dominios = {
     "Domínio 6 (CTD)": ["dominio6missense", "dominio6nonsense"]
 }
 
+risco_por_dominio = {}
+
 for nome, keys in dominios.items():
-    print(f"--- {nome} ---")
-    for k in keys:
-        valor = pelomenosumtabela.get(k, None)
-        if valor is not None:
+    soma = sum(pelomenosumtabela.get(k, 0) for k in keys)
+    risco_por_dominio[nome] = soma
 
-            label = re.sub(r"^dominio\d+", "", k)
-
-            label = label.replace("missense_conservative", "missense conservativa")
-            label = label.replace("missense_non_conservative", "missense não conservativa")
-
-            label = label.replace("_", " ").capitalize()
-
-            print(f"{label}: {valor:.3f}%")
-    print()
+for nome, risco in risco_por_dominio.items():
+    dano = descricao_dominios.get(nome, "alteração funcional")
+    print(f"→ {nome}: {risco:.3f}% de chance de causar {dano}.")
+print()
 
 print("=======================================================================\n")
+
+print(f"Chance de uma mutação que interrompe completamente a função da p53 (mutações nonsense): {nonsense_total:.3f}%")
+
+print("""
+Essas mutações costumam gerar uma proteína p53 truncada, que perde a capacidade de:
+
+• Reparar DNA danificado  
+• Parar o ciclo celular para evitar replicação defeituosa  
+• Induzir apoptose (“morte celular programada”) quando necessário  
+
+Em outras palavras, mutações nonsense estão fortemente associadas à perda total do papel da p53 como supressora tumoral.
+""")
 
 input("\nPrograma finalizado. Pressione ENTER para sair...")
 
