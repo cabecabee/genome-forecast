@@ -85,9 +85,6 @@ nonsense_total = sum(
     if "nonsense" in key
 )
 print("=======================================================================\n")
-print("As porcentagens abaixo representam a CHANCE ABSOLUTA de ocorrer pelo menos\n"
-      "uma mutação em cada domínio, considerando a exposição informada.\n"
-      "Esses valores NÃO somam 100%, pois cada domínio é independente.\n")
 
 descricao_dominios = {
     "Domínio 1 (TAD)": "diminuição da ativação de genes de resposta ao dano",
@@ -131,6 +128,21 @@ Essas mutações costumam gerar uma proteína p53 truncada, que perde a capacida
 
 Em outras palavras, mutações nonsense estão fortemente associadas à perda total do papel da p53 como supressora tumoral.
 """)
+
+print("=======================================================================\n")
+
+print("As porcentagens acima representam a CHANCE ABSOLUTA de ocorrer pelo menos\n"
+      "uma mutação em cada domínio, considerando a exposição informada.\n"
+      "Esses valores NÃO somam 100%, pois cada domínio é independente.\n")
+
+print("=======================================================================\n")
+
+print("Com isso, constata-se um risco ()\n")
+
+print("=======================================================================\n")
+
+print("De qualquer forma, denota-se que este hábito é maléfico e tem potencial de \n" \
+"causar câncer em qualquer quantidade.")
 
 input("\nPrograma finalizado. Pressione ENTER para sair...")
 
