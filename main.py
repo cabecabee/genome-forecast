@@ -168,9 +168,9 @@ print("As porcentagens acima representam a CHANCE ABSOLUTA de ocorrer pelo menos
 
 print("=======================================================================\n")
 
-print("Com isso, constata-se um risco ()\n")
+# print("Com isso, constata-se um risco ()\n")
 
-print("=======================================================================\n")
+# print("=======================================================================\n")
 
 print("De qualquer forma, denota-se que este hábito é maléfico e tem potencial de \n" \
 "causar câncer em qualquer quantidade.")
