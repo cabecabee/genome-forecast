@@ -1,7 +1,10 @@
 from functions.sorteio_pond import sorteio_pond
 import random
+from functions.poisson import poisson
 def mat_mut(lambida, p_cumulative, substitution_probs):
   
+  lambida = poisson(lambida)
+
   if lambida > 1:
      mat_mut_lmbda = lambida
   else:
