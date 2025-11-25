@@ -87,12 +87,43 @@ nonsense_total = sum(
 print("=======================================================================\n")
 
 descricao_dominios = {
-    "Domínio 1 (TAD)": "diminuição da ativação de genes de resposta ao dano",
-    "Domínio 2 (PRD)": "falha parcial na capacidade da p53 de recrutar proteínas de reparo",
-    "Domínio 3 (DBD)": "redução da capacidade de ligação ao DNA, prejudicando a supressão tumoral",
-    "Domínio 4 (NLS)": "dificuldade de transportar a p53 para o núcleo da célula",
-    "Domínio 5 (OD)": "problemas na formação do tetrâmero funcional da p53",
-    "Domínio 6 (CTD)": "alterações na regulação fina e reconhecimento de DNA danificado"
+    "Domínio 1 (TAD)": "uma perda na capacidade de recrutar genes que executam o reparo e controlam o ciclo celular. Ou seja, quando uma região como essa é danificada,\n"
+    "ocorre a dificuldade de recrutar proteínas necessárias para iniciar a transcrição, e,\n"
+    "consequentemente, a célula continua em divisão mesmo sem ativar adequadamente os meios corretores.\n"
+    "• Com o tempo, a junção da divisão contínua e do reparo insuficiente favorece a instabilidade genética, facilitando o\n"
+    "surgimento de mutações adicionais e contribuindo para a evolução de fenótipos malignos.\n",
+
+    "Domínio 2 (PRD)": "falha parcial na capacidade da p53 de recrutar proteínas de reparo. Neste sentido,\n"
+    "a p53 passa a ter dificuldades na ativação de proteínas pró-apoptóticas cruciais,\n"
+    "reduzindo a eficiência com que a célula elimina estruturas comprometidas.\n"
+    "Como consequência, células que deveriam ser removidas permanecem em atividade.\n"
+    "• Esse acúmulo de células mutadas favorece a concentração de alterações genéticas e impulsiona a evolução de células danosas.\n",
+
+    "Domínio 3 (DBD)": "redução da capacidade de ligação ao DNA. Com isso, a estrutura do sítio de ligação é alterada,\n"
+    "impedindo a p53 de ativar genes responsáveis por interromper o ciclo celular,indutores de reparo ou à apoptose. Sem essa ligação,\n"
+    "a regulação que depende da p53 é diretamente comprometida.\n"
+    "• A partir disso, a ausência dessa regulação permite que danos induzidos se acumulem descontroladamente,\n"
+    "desestabilizando o genoma e acelerando o surgimento de mutações que estimulam a progressão neoplásica.\n",
+
+    "Domínio 4 (NLS)": "dificuldade em transportar a p53 para o núcleo da célula.\n"
+    "Dessa forma, a proteína passa a apresentar dificuldade em ser reconhecida pelos mecanismos de transporte do núcleo,\n"
+    "permanecendo em grande parte ou por completo no citoplasma. Consequentemente, a p53 deixa de se comunicar com o DNA,\n"
+    "o que impede a ativação de genes relevantes como os citados anteriormente.\n"
+    "• Logo, essa falha da “inserção” da p53 no DNA reduz drasticamente o potencial de vigilância genômica,\n"
+    "favorecendo a permanência de danos não corrigidos nas células.\n",
+
+    "Domínio 5 (OD)": "problemas na formação do tetrâmetro funcional da p53. Quando isso ocorre, a proteína se torna incapaz de assumir sua forma funcional,\n"
+    "resultando em complexos instáveis e mal formados, impedindo que a p53 execute sua função de forma eficaz,\n"
+    "mesmo quando outras regiões permanecem estruturadas.\n"
+    "• Portanto, a insuficiência de tetramerização compromete profundamente a resposta ao dano celular,\n"
+    "permitindo que células danificadas persistam e se dividam, o que favorece o aumento de alterações genômicas.\n",
+
+    "Domínio 6 (CTD)": "alterações na regulação fina e reconhecimento de DNA danificado. Isto é,\n"
+    "a proteína passa a ter dificuldade em reconhecer regiões prejudicadas do DNA e\n"
+    "em receber modificações químicas que modulam sua ativação.\n"
+    "• Como resultado, a p53 responde de maneira insuficiente ou tardia aos sinais de estresse genômico. E, com o tempo,\n"
+    "essa resposta ineficiente permite que danos se acumulem sem a correção necessária,\n"
+    "ampliando a instabilidade genética e contribuindo para a formação de células com características possivelmente oncogênicas.\n"
 }
 
 dominios = {
@@ -112,7 +143,7 @@ for nome, keys in dominios.items():
 
 for nome, risco in risco_por_dominio.items():
     dano = descricao_dominios.get(nome, "alteração funcional")
-    print(f"-> {nome}: {risco:.3f}% de chance de ter {dano}.")
+    print(f"-> {nome}: {risco:.3f}% de chance de apresentar {dano}")
 print()
 
 print("=======================================================================\n")
