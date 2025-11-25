@@ -19,11 +19,18 @@ from functions.repeat_mutations import repeat_mutations
 from functions.scale import normalize
 from functions.scale import calculate_risk
 from functions.pelomenosum import pelomenosum
+import os
 import sys
 import re
 
 from tkinter import Tk # interface gráfica para escolher um arquivo fasta
 from tkinter.filedialog import askopenfilename
+
+def clear_terminal():
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
 
 while True:
     usecustomfasta = input(
@@ -84,6 +91,7 @@ nonsense_total = sum(
     value for key, value in pelomenosumtabela.items()
     if "nonsense" in key
 )
+clear_terminal()
 print("=======================================================================\n")
 
 descricao_dominios = {
