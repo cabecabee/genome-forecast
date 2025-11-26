@@ -12,7 +12,7 @@ Currently, the program is focused on **tobacco use** as a mutagenic factor.
 3. Based on this data, it estimates the **number and types of mutations** that could occur.  
 4. It then simulates these mutations in the provided DNA sequence and classifies them (e.g., **silent**, **missense**, or **nonsense**).  
 
-## Features (Work in Progress)
+## Features
 - [x] User input and data processing  
   - Calculates the estimated number of mutations based on lifestyle data  
 - [x] Reading and parsing FASTA files  
