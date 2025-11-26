@@ -1,6 +1,4 @@
-from functions.read_fasta import read_fasta
 from functions.mat_mut import mat_mut
-from functions.duplicate import duplicate
 
 def mutate(lmbda, seq, p_cumulative, substitution_probs):
     seq = list(seq)

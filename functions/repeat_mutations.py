@@ -1,4 +1,3 @@
-from functions.prob_mut import prob_mut
 from functions.mutate import mutate
 from functions.verify_mutations import verify_mutations
 from functions.analyze_mutations import analyze_mutations

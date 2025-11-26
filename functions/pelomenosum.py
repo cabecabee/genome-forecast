@@ -1,5 +1,4 @@
 from functions.repeat_mutations import repeat_mutations
-from functions.mat_mut import mat_mut
 def pelomenosum(lmbda, seq, p_cumulative, probabilities_mut, simulations=50000):
     E = 2.718281828459
     domaintable = repeat_mutations(lmbda, seq, p_cumulative, probabilities_mut, simulations)
