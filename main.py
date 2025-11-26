@@ -33,41 +33,67 @@ def clear_terminal():
         os.system('clear')
 
 while True:
-    usecustomfasta = input(
-        "Você gostaria de usar um arquivo FASTA personalizado (por exemplo, da sua própria TP53)?\n"
-        "(Note que esse arquivo FASTA deve estar em bases nitrogenadas de DNA e não codificado.)\n"
-        "Se você não fornecer, será usado o FASTA padrão da TP53 obtido no banco de dados NCBI (National Library of Medicine).\n"
-        "Digite 'S' para Sim ou 'N' para Não: "
-    ).strip().lower()
+    try:
+        usecustomfasta = input(
+            "Você gostaria de usar um arquivo FASTA personalizado (por exemplo, da sua própria TP53)?\n"
+            "(Note que esse arquivo FASTA deve estar em bases nitrogenadas de DNA e não codificado.)\n"
+            "Se você não fornecer, será usado o FASTA padrão da TP53 obtido no banco de dados NCBI (National Library of Medicine).\n"
+            "Digite 'S' para Sim ou 'N' para Não: "
+        ).strip().lower()
+    except (KeyboardInterrupt, EOFError):
+        print("\nEntrada cancelada pelo usuário.")
+        input("\nPrograma finalizado. Pressione ENTER para sair...")
+        sys.exit()
 
-    if usecustomfasta in ["s", "n"]:
+    if usecustomfasta in ("s", "n"):
         break
-    else:
-        print("Resposta inválida! Digite 'S' ou 'N'.\n")
+
+    print("Resposta inválida! Digite 'S' ou 'N'.\n")
 
 if usecustomfasta == "s":
-    root = Tk()
-    root.withdraw() # esconde a janela do tkinter que é inútil para nós no momento
-    filepath = askopenfilename(
-        title="Selecione o arquivo FASTA",
-        filetypes=[
-            ("FASTA files", "*.fasta"),
-            ("FASTA Nucleotide", "*.fna"),
-            ("FASTA Fragments", "*.ffn"),
-            ("FASTA short", "*.fa"),
-            ("FASTA alternate", "*.fas")
-        ]
-    )
-    root.destroy()  # fecha a instância Tk após selecionar o arquivo
-    if filepath:
-        print("Arquivo selecionado:", filepath)
-    else:
-        print("Nenhum arquivo selecionado. Usando o FASTA da NCBI por padrão.")
+    try:
+        root = Tk()
+        root.withdraw() # esconde a janela do tkinter que é inútil para nós no momento
+        filepath = askopenfilename(
+            title="Selecione o arquivo FASTA",
+            filetypes=[
+                ("FASTA files", "*.fasta"),
+                ("FASTA Nucleotide", "*.fna"),
+                ("FASTA Fragments", "*.ffn"),
+                ("FASTA short", "*.fa"),
+                ("FASTA alternate", "*.fas")
+            ]
+        )
+    except Exception:
+        pass
+    finally:
+        try:
+            root.destroy()  # fecha a instância Tk após selecionar o arquivo
+        except:
+            pass
+
+    if not filepath or not os.path.isfile(filepath):
+        print("Nenhum arquivo válido selecionado. Usando FASTA da NCBI por padrão.")
         filepath = resource_path("fastafiles/p53.fasta")
+
+    elif filepath:
+        print("Arquivo selecionado:", filepath)
+
 elif usecustomfasta == "n":
     filepath = resource_path("fastafiles/p53.fasta")
 
-lmbda, prevdec = user_data()
+result = user_data()
+
+if not result:
+    input("\nPrograma finalizado. Pressione ENTER para sair...")
+    sys.exit()
+
+try:
+    lmbda, prevdec = result
+except Exception:
+    print("Valores retornados estão inválidos.")
+    input("\nPrograma finalizado. Pressione ENTER para sair...")
+    sys.exit()
 
 if lmbda is None or lmbda == 0:
     input("\nPrograma finalizado. Pressione ENTER para sair...")
