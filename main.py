@@ -88,6 +88,8 @@ except Exception:
     input("\nPrograma finalizado. Pressione ENTER para sair...")
     sys.exit()
 
+print("Os dados estão sendo processados, isso pode demorar um pouco dependendo dos seus números...")
+
 p_cumulative, probabilities_mut = prob_mut(seq)
 
 pelomenosumtabela = pelomenosum(lmbda, seq, p_cumulative, probabilities_mut, 113000)
@@ -100,6 +102,11 @@ nonsense_total = sum(
 )
 clear_terminal()
 print("=======================================================================\n")
+
+if prevdec == 1:
+    print("Considerando que o hábito relatado seja mantido pelo tempo em que a previsão foi solicitada, você terá:\n")
+elif prevdec == 2:
+    print("Considerando os hábitos relatados, observa-se que você tem:")
 
 descricao_dominios = {
     "Domínio 1 (TAD)": "uma perda na capacidade de recrutar genes que executam o reparo e controlam o ciclo celular. Ou seja, quando uma região como essa é danificada,\n"
@@ -133,11 +140,11 @@ descricao_dominios = {
     "• Portanto, a insuficiência de tetramerização compromete profundamente a resposta ao dano celular,\n"
     "permitindo que células danificadas persistam e se dividam, o que favorece o aumento de alterações genômicas.\n",
 
-    "Domínio 6 (CTD)": "alterações na regulação fina e reconhecimento de DNA danificado. Isto é,\n"
-    "a proteína passa a ter dificuldade em reconhecer regiões prejudicadas do DNA e\n"
-    "em receber modificações químicas que modulam sua ativação.\n"
-    "• Como resultado, a p53 responde de maneira insuficiente ou tardia aos sinais de estresse genômico. E, com o tempo,\n"
-    "essa resposta ineficiente permite que danos se acumulem sem a correção necessária,\n"
+    "Domínio 6 (CTD)": "alterações na regulação fina e reconhecimento de DNA danificado.\n"
+    "Isto é, a proteína passa a ter dificuldade em reconhecer regiões prejudicadas do DNA\n"
+    "e em receber modificações químicas que modulam sua ativação.\n"
+    "• Como resultado, a p53 responde de maneira insuficiente ou tardia aos sinais de estresse genômico.\n"
+    "E, com o tempo, essa resposta ineficiente permite que danos se acumulem sem a correção necessária,\n"
     "ampliando a instabilidade genética e contribuindo para a formação de células com características possivelmente oncogênicas.\n"
 }
 
@@ -158,10 +165,10 @@ for nome, keys in dominios.items():
 
 for nome, risco in risco_por_dominio.items():
     dano = descricao_dominios.get(nome, "alteração funcional")
-    print(f"-> {nome}: {risco:.3f}% de chance de apresentar {dano}")
+    print(f"-> {risco:.3f}% de chance de apresentar {dano}")
 print()
 
-print("=======================================================================\n")
+print("-----------------------------------------------------------------------\n")
 
 print(f"Chance de uma mutação que interrompe completamente a função da p53 (mutações nonsense): {nonsense_total:.3f}%")
 
@@ -175,20 +182,18 @@ Essas mutações costumam gerar uma proteína p53 truncada, que perde a capacida
 Em outras palavras, mutações nonsense estão fortemente associadas à perda total do papel da p53 como supressora tumoral.
 """)
 
-print("=======================================================================\n")
+print("-----------------------------------------------------------------------\n")
 
-print("As porcentagens acima representam a CHANCE ABSOLUTA de ocorrer pelo menos\n"
+print("As porcentagens acima representam a chance percentual de ocorrer pelo menos\n"
       "uma mutação em cada domínio, considerando a exposição informada.\n"
       "Esses valores NÃO somam 100%, pois cada domínio é independente.\n")
 
-print("=======================================================================\n")
-
-# print("Com isso, constata-se um risco ()\n")
-
-# print("=======================================================================\n")
+print("-----------------------------------------------------------------------\n")
 
 print("De qualquer forma, denota-se que este hábito é maléfico e tem potencial de \n" \
-"causar câncer em qualquer quantidade.")
+"causar câncer em qualquer quantidade.\n")
+
+print("=======================================================================\n")
 
 input("\nPrograma finalizado. Pressione ENTER para sair...")
 
