@@ -103,9 +103,9 @@ nonsense_total = sum(
 clear_terminal()
 print("=======================================================================\n")
 
-if prevdec == 1:
+if prevdec == "1":
     print("Considerando que o hábito relatado seja mantido pelo tempo em que a previsão foi solicitada, você terá:\n")
-elif prevdec == 2:
+elif prevdec == "2":
     print("Considerando os hábitos relatados, observa-se que você tem:")
 
 descricao_dominios = {
