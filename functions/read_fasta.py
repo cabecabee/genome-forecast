@@ -10,10 +10,6 @@ def read_fasta(filepath):
     if not isdna(filepath):
         print("O arquivo não contém apenas ACTG e U.")
         return
-    
-    if not seq:
-        print("O FASTA apresentado está vazio.")
-        return
 
     with open(filepath, 'r') as file:
         header = None
@@ -34,6 +30,11 @@ def read_fasta(filepath):
                 seq = []
             else:
                 seq.append(line)
+
+        if not seq:
+            print("O FASTA apresentado está vazio.")
+            return
+        
         if header is not None:
             yield {
                 "id": header.split()[0],

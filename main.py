@@ -34,6 +34,7 @@ while True:
     print("Resposta inválida! Digite 'S' ou 'N'.\n")
 
 if usecustomfasta == "s":
+    root = None
     try:
         root = Tk()
         root.withdraw() # esconde a janela do tkinter que é inútil para nós no momento
@@ -47,13 +48,11 @@ if usecustomfasta == "s":
                 ("FASTA alternate", "*.fas")
             ]
         )
-    except Exception:
-        pass
+    except Exception as e:
+        print("ERRO:", e)
     finally:
-        try:
+        if root is not None:
             root.destroy()  # fecha a instância Tk após selecionar o arquivo
-        except:
-            pass
 
     if not filepath or not os.path.isfile(filepath):
         print("Nenhum arquivo válido selecionado. Usando FASTA da NCBI por padrão.")
