@@ -82,8 +82,7 @@ except Exception:
 
 p_cumulative, probabilities_mut = prob_mut(seq)
 
-pelomenosumtabela = pelomenosum(lmbda, seq, p_cumulative, probabilities_mut)
-domaintable = repeat_mutations(lmbda, seq, p_cumulative, probabilities_mut)
+pelomenosumtabela = pelomenosum(lmbda, seq, p_cumulative, probabilities_mut, 113000)
 
 for k in pelomenosumtabela:
     pelomenosumtabela[k] *= 100
