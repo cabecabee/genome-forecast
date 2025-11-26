@@ -6,6 +6,8 @@
 
 Currently, the program is focused on **tobacco use** as a mutagenic factor.
 
+At this moment, the program is focused on **portuguese**. It is planned to have english support in the future.
+
 ## How it works
 1. The user provides one or more DNA sequences in a **FASTA file**.  
 2. The program collects user input about their daily habits, such as smoking frequency and intensity.  
