@@ -106,7 +106,7 @@ print("=======================================================================\n
 if prevdec == "1":
     print("Considerando que o hábito relatado seja mantido pelo tempo em que a previsão foi solicitada, você terá:\n")
 elif prevdec == "2":
-    print("Considerando os hábitos relatados, observa-se que você tem:")
+    print("Considerando os hábitos relatados, observa-se que você tem:\n")
 
 descricao_dominios = {
     "Domínio 1 (TAD)": "uma perda na capacidade de recrutar genes que executam o reparo e controlam o ciclo celular. Ou seja, quando uma região como essa é danificada,\n"
