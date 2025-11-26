@@ -22,6 +22,8 @@ Currently, the program is focused on **tobacco use** as a mutagenic factor.
   - Uses **weights derived from the COSMIC Cancer Database**  
 - [x] DNA sequence mutation simulation  
   - Determines mutation impact: silent, missense, or nonsense
+- [x] Gives a chance of a mutation happening in each domain (and chance of a nonsense mutation)
+  - Gives the user context (what a mutation in each domain could mean)
      
 ## How to Run
 
@@ -41,6 +43,3 @@ If you want to run the program from source:
 
    ```bash
    python main.py
-
-## Future Plans
-- [ ] Define what the mutations may signify to the resulting protein structure or function
