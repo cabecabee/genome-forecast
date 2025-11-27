@@ -93,7 +93,7 @@ except Exception:
     input("\nPrograma finalizado. Pressione ENTER para sair...")
     sys.exit()
 
-print("Os dados estão sendo processados, isso pode demorar um pouco dependendo dos seus números...")
+print("\nOs dados estão sendo processados, isso pode demorar um pouco dependendo dos seus números...")
 
 p_cumulative, probabilities_mut = prob_mut(seq)
 
@@ -199,8 +199,6 @@ print("De qualquer forma, denota-se que este hábito é maléfico e tem potencia
 "causar câncer em qualquer quantidade.\n")
 
 print("=======================================================================\n")
-
-print((p_cumulative, probabilities_mut))
 
 input("\nPrograma finalizado. Pressione ENTER para sair...")
 
