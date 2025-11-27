@@ -15,6 +15,11 @@ def clear_terminal():
     else:
         os.system('clear')
 
+print("\n---------------------------------------- Bem vindo(a) ao Genome Forecast ----------------------------------------\n")
+
+print("A seguir, iremos lhe solicitar alguns dados para que sejam feitas a sua previsão genômica a partir do seu hábito.\n")
+print("As perguntas a seguir devem ser fornecidas todas em números inteiros\n")
+
 while True:
     try:
         usecustomfasta = input(
@@ -194,6 +199,8 @@ print("De qualquer forma, denota-se que este hábito é maléfico e tem potencia
 "causar câncer em qualquer quantidade.\n")
 
 print("=======================================================================\n")
+
+print((p_cumulative, probabilities_mut))
 
 input("\nPrograma finalizado. Pressione ENTER para sair...")
 
