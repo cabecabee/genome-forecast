@@ -171,8 +171,7 @@ for nome, keys in dominios.items():
 for nome, risco in risco_por_dominio.items():
     dano = descricao_dominios.get(nome, "alteração funcional")
     print(f"-> {risco:.3f}% de chance de apresentar {dano}")
-print()
-
+    
 print("-----------------------------------------------------------------------\n")
 
 print(f"Chance de uma mutação que interrompe completamente a função da p53 (mutações nonsense): {nonsense_total:.3f}%")
