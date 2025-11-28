@@ -17,28 +17,28 @@ def clear_terminal():
 
 print("\n---------------------------------------- Bem vindo(a) ao Genome Forecast ----------------------------------------\n")
 
-print("A seguir, iremos lhe solicitar alguns dados para que sejam feitas a sua previsão genômica a partir do seu hábito.\n")
+print("A seguir, iremos lhe solicitar alguns dados para que seja feita a sua previsão genômica a partir do seu hábito.\n")
 print("As perguntas a seguir devem ser fornecidas todas em números inteiros\n")
 
 while True:
     try:
         usecustomfasta = input(
-            "Você gostaria de usar um arquivo FASTA personalizado (por exemplo, da sua própria TP53)?\n"
-            "(Note que esse arquivo FASTA deve estar em bases nitrogenadas de DNA e não codificado.)\n"
-            "Se você não fornecer, será usado o FASTA padrão da TP53 obtido no banco de dados NCBI (National Library of Medicine).\n"
-            "Digite 'S' para Sim ou 'N' para Não: "
-        ).strip().lower()
+            "Você gostaria de usar um arquivo FASTA personalizado para previsão?\n"
+            "O arquivo deve estar em bases nitrogenadas de DNA e ser referente a CDS do TP53.\n"
+            "\nSe você não fornecer, será usado o FASTA padrão da TP53 obtido no banco de dados NCBI (National Library of Medicine).\n"
+            "Digite '1' para Sim ou '2' para Não: "
+        ).strip()
     except (KeyboardInterrupt, EOFError):
         print("\nEntrada cancelada pelo usuário.")
         input("\nPrograma finalizado. Pressione ENTER para sair...")
         sys.exit()
 
-    if usecustomfasta in ("s", "n"):
+    if usecustomfasta in ("1", "2"):
         break
 
-    print("Resposta inválida! Digite 'S' ou 'N'.\n")
+    print("Resposta inválida! Digite '1' ou '2'.\n")
 
-if usecustomfasta == "s":
+if usecustomfasta == "1":
     root = None
     try:
         root = Tk()
@@ -66,7 +66,7 @@ if usecustomfasta == "s":
     elif filepath:
         print("Arquivo selecionado:", filepath)
 
-elif usecustomfasta == "n":
+elif usecustomfasta == "2":
     filepath = resource_path("fastafiles/p53.fasta")
 
 result = user_data()
