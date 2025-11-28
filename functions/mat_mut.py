@@ -5,10 +5,9 @@ def mat_mut(lambida, p_cumulative, substitution_probs):
   
   lambida = poisson(lambida)
 
-  if lambida > 1:
-     mat_mut_lmbda = lambida
-  else:
-     mat_mut_lmbda = 1
+
+  mat_mut_lmbda = lambida
+
 
   mutate = []
   for i in range(round(mat_mut_lmbda)):
