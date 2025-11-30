@@ -1,5 +1,8 @@
 # Genome Forecast
     A program designed to receive DNA sequences and simulate mutations based on user habits.
+<p align="center">
+  <img src="icon.png" alt="Logo" width="200">
+</p>
 
 ## Overview
 **Genome Forecast** estimates how certain lifestyle habits may cause mutations in DNA sequences, helping to evaluate an individual's potential risk of developing cancer.  
