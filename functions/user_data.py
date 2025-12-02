@@ -37,7 +37,10 @@ def user_data():
             print("Há quantos anos você fuma?")
             try:
                 period_a = int(input("Tempo: ").strip())
-                break
+                if period_a >= 0:
+                    break
+                else:
+                    print("Resposta deve ser >= 0!")
             except ValueError:
                 print("A resposta deve ser em números inteiros!")
 
@@ -47,7 +50,10 @@ def user_data():
             print("E quantos meses em cima disso?")
             try:
                 period_m = int(input("Tempo: ").strip())
-                break
+                if period_m >= 0:
+                    break
+                else:
+                    print("Resposta deve ser >= 0!")
             except ValueError:
                 print("A resposta deve ser em números inteiros!")
 
@@ -66,7 +72,10 @@ def user_data():
                 print("Para quantos anos você quer essa previsão?")
                 try:
                     periodp_a = int(input("Tempo: ").strip())
-                    break
+                    if periodp_a >= 0:
+                        break
+                    else:
+                        print("Resposta deve ser >= 0!")
                 except ValueError:
                     print("A resposta deve ser em números inteiros!")
 
@@ -75,7 +84,10 @@ def user_data():
                 print("E quantos meses em cima disso?")
                 try:
                     periodp_m = int(input("Tempo: ").strip())
-                    break
+                    if periodp_m >= 0:
+                        break
+                    else:
+                        print("Resposta deve ser >= 0!")
                 except ValueError:
                     print("A resposta deve ser em números inteiros!")
 
